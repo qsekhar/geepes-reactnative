@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     borderWidth: 2,
     borderColor: "#FFF",
-    padding: 7
+    padding: 50
   },
   starStyle: {
     width: 100,
