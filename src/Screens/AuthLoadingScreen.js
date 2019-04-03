@@ -3,8 +3,9 @@ import {
   StyleSheet,
   Animated,
   Dimensions,
-  AsyncStorage
 } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 import LinearGradient from "react-native-linear-gradient";
 
@@ -24,7 +25,7 @@ class AuthLoadingScreen extends Component {
   }
 
   _bootstrapAsync = async () => {
-    //AsyncStorage.removeItem('auth_token');
+    AsyncStorage.removeItem('auth_token');
     AsyncStorage.getItem('auth_token')
     .then(auth_token => {
       if(auth_token){

@@ -19,7 +19,7 @@ import { LoginManager, GraphRequest, GraphRequestManager } from "react-native-fb
 
 import NavigationService from '../../Navigation/NavigationService' 
 
-import {AsyncStorage} from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const loginWithFacebook = () => (dispatch, getState) =>  {
   dispatch({type: LOGIN_WITH_FACEBOOK_INIT});

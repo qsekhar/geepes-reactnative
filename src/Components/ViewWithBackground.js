@@ -8,6 +8,8 @@ import { Snackbar } from 'react-native-paper';
 
 import {connect} from 'react-redux';
 
+
+
 class ViewWithBackground extends Component {
   render() {
     return (
@@ -18,7 +20,7 @@ class ViewWithBackground extends Component {
             height: '100%'
           }}
           imageStyle={{
-            resizeMode: 'contain' // works only here!
+            resizeMode: 'cover' 
           }}
       >
         <Snackbar

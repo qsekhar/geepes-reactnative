@@ -7,6 +7,8 @@ import TutorialSlider from '../Components/TutorialSlider'
 import {GreenButton} from '../Components/Utils'
 import FacebookLoginButton from '../Containers/Utils/FacebookLoginButton'
 
+import LandingScreenStl from '../Themes/Styles/LandingScreenStl'
+
 
 export default class LandingScreen extends Component {
   constructor(props) {
@@ -18,10 +20,13 @@ export default class LandingScreen extends Component {
   render() {
     return (
       <ViewWithBackground>
-        <TutorialSlider />
-        <View>
-          <FacebookLoginButton />
-          <GreenButton>
+        <View style={LandingScreenStl.sliderContainer}>
+          <TutorialSlider />
+        </View>
+        
+        <View style={LandingScreenStl.buttonContainer}>
+          <FacebookLoginButton style={LandingScreenStl.fbLoginButton}/>
+          <GreenButton  style={LandingScreenStl.emailLoginButton}>
             Use Email Instead
           </GreenButton>
         </View>
