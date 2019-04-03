@@ -4,7 +4,11 @@ import { ImageBackground } from 'react-native';
 
 import themeImages from '../Themes/Utils/Images'
 
-export default class ViewWithBackground extends Component {
+import { Snackbar } from 'react-native-paper';
+
+import {connect} from 'react-redux';
+
+class ViewWithBackground extends Component {
   render() {
     return (
       <ImageBackground
@@ -17,8 +21,28 @@ export default class ViewWithBackground extends Component {
             resizeMode: 'contain' // works only here!
           }}
       >
+        <Snackbar
+          visible={this.props.showAlert}
+          onDismiss={() => this.props.dispatch({type:'HIDE_GLOBAL_ALERT'})}
+          action={{
+            label: 'Ok',
+            onPress: () => {
+              this.props.dispatch({type:'HIDE_GLOBAL_ALERT'})
+            },
+          }}
+        >
+          {this.props.AlertText}
+        </Snackbar>
+
         {this.props.children}
       </ImageBackground>
     );
   }
 }
+
+const mapStateToProp = (state) => ({
+  showAlert : state.Global.showAlert,
+  AlertText : JSON.stringify( state.Global.axiosErrorData.data.error )
+})
+
+export default connect(mapStateToProp)(ViewWithBackground);

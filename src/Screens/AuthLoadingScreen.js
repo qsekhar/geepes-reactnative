@@ -8,9 +8,10 @@ import {
 
 import LinearGradient from "react-native-linear-gradient";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 import { connect } from 'react-redux';
+import { Auth } from '../StoreManager/Actions'
 
 import themeImages from '../Themes/Utils/Images'
 
@@ -18,16 +19,21 @@ class AuthLoadingScreen extends Component {
 
   constructor(props) {
     super(props);
-    this._bootstrapAsync();
-
     this.animatedValue = new Animated.Value(0.5);
     this.animatedValue2 = new Animated.Value(0);
   }
 
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
-
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    AsyncStorage.removeItem('auth_token');
+    AsyncStorage.getItem('auth_token')
+    .then(auth_token => {
+      if(auth_token){
+        //this.props.dispatch(Auth.getUserDetails());
+        this.props.navigation.navigate('App');
+      } else {
+        this.props.navigation.navigate('Auth');
+      }
+    });
   };
 
   componentDidMount() {
@@ -42,6 +48,8 @@ class AuthLoadingScreen extends Component {
       delay: 200,
       duration: 3000
     }).start();
+
+    this._bootstrapAsync();
   }
 
 
