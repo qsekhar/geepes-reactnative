@@ -55,7 +55,7 @@ const loginWithFacebook = () => (dispatch, getState) =>  {
 
                 AsyncStorage.setItem('auth_token', response.data.user.auth_token)
                 .then(() => {
-                  //NavigationService.navigate('AuthLoading');
+                  NavigationService.navigate('AuthLoading');
                 })
                 
               })

@@ -24,7 +24,7 @@ class AuthLoadingScreen extends Component {
   }
 
   _bootstrapAsync = async () => {
-    AsyncStorage.removeItem('auth_token');
+    //AsyncStorage.removeItem('auth_token');
     AsyncStorage.getItem('auth_token')
     .then(auth_token => {
       if(auth_token){
