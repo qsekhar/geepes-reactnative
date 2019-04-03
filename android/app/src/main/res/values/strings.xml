@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Geepes</string>
+    <string name="facebook_app_id">407241220061754</string>
+    <string name="fb_login_protocol_scheme">fb407241220061754</string>
 </resources>

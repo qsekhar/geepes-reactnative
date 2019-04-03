@@ -5,7 +5,8 @@ export default theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'tomato',
-    accent: 'yellow',
+    primary: '#296f00',
+    accent: '#004073',
+    orange: '#f1612f'
   },
 };

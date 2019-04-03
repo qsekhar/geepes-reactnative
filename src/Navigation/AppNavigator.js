@@ -7,12 +7,19 @@ import {
 
   import AuthLoadingScreen from '../Screens/AuthLoadingScreen'
   import HomeScreen from '../Screens/HomeScreen'
-  import SignInScreen from '../Screens/SignInScreen'
+  import LandingScreen from '../Screens/LandingScreen'
 
 
 
-const AppStack = createDrawerNavigator({ Home: HomeScreen });
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const AppStack = createDrawerNavigator(
+  { Home: HomeScreen }
+);
+const AuthStack = createStackNavigator(
+  { Landing: LandingScreen }, 
+  {
+    headerMode: 'none',
+  }
+);
 
 const RootNavigator = createSwitchNavigator({
   AuthLoading: AuthLoadingScreen,

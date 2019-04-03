@@ -12,6 +12,8 @@ const { width, height } = Dimensions.get("window");
 
 import { connect } from 'react-redux';
 
+import themeImages from '../Themes/Utils/Images'
+
 class AuthLoadingScreen extends Component {
 
   constructor(props) {
@@ -25,7 +27,7 @@ class AuthLoadingScreen extends Component {
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
 
-    //this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 
   componentDidMount() {
@@ -65,7 +67,7 @@ class AuthLoadingScreen extends Component {
       >
       <Animated.View style={[styles.ring, truckStyle]}>
         <Animated.Image
-          source={require("../Themes/Images/logo.png")}
+          source={themeImages.logo}
           style={[
             {
               resizeMode: "contain",
