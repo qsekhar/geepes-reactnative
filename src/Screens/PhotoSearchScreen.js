@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 const FirstRoute = () => (
@@ -14,7 +14,7 @@ const ThirdRoute = () => (
 
 
 import ViewWithBackground from '../Components/ViewWithBackground'
-export default class HomeScreen extends Component {
+export default class PhotoSearchScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -11,6 +11,9 @@ import {
   GET_USER_TOKEN_ERROR,
   GET_USER_TOKEN_SUCCESS,
 
+  GET_USER_DETAILS_SUCCESS,
+  GET_USER_DETAILS_ERROR
+
 } from '../Utils/Constants'
 
 import AxiosClient from '../../AxiosClient/AxiosClient'
@@ -87,7 +90,9 @@ const loginWithEmail = () => (dispatch, getState) =>  {
 const getUserDetails = () => (dispatch, getState) => {
   AxiosClient.get('api/user/profile/details')
   .then((result) => {
-    console.log(result);
+    dispatch({type: GET_USER_DETAILS_SUCCESS, payload: result.data});
+  }).catch((error) => {
+    dispatch({type: GET_USER_DETAILS_ERROR, payload: "Can't get User Details"});
   })
 }
 

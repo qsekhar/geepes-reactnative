@@ -25,11 +25,11 @@ class AuthLoadingScreen extends Component {
   }
 
   _bootstrapAsync = async () => {
-    AsyncStorage.removeItem('auth_token');
+    //AsyncStorage.removeItem('auth_token');
     AsyncStorage.getItem('auth_token')
     .then(auth_token => {
       if(auth_token){
-        //this.props.dispatch(Auth.getUserDetails());
+        this.props.dispatch(Auth.getUserDetails());
         this.props.navigation.navigate('App');
       } else {
         this.props.navigation.navigate('Auth');

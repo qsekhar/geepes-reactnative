@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {AsyncStorage} from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import {Global} from '../StoreManager/Actions'
 
@@ -47,7 +47,9 @@ AxiosClient.interceptors.response.use((response) => {
       // browser and an instance of
       // http.ClientRequest in node.js
       //console.log(error.request);
+      store.dispatch({type:"AXIOS_REQUEST_ERROR", payload: error.request })
   } else {
+    store.dispatch({type:"AXIOS_GENARAL_ERROR", payload: error })
     return Promise.reject(error);
   }
 });

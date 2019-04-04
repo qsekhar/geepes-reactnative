@@ -11,13 +11,23 @@ import {
   GET_USER_TOKEN_ERROR,
   GET_USER_TOKEN_SUCCESS,
 
+  GET_USER_DETAILS_SUCCESS,
+  GET_USER_DETAILS_ERROR
+
 } from '../Utils/Constants'
 
 const initialState = {
   isLoading : false,
   facebookError : '',
   fbGrantedPermission : '',
-  facebookGraphData : {}
+  facebookGraphData : {},
+  userDetails: {
+    user : {
+      first_name: '',
+      last_name: '',
+      email: ''
+    }
+  }
 }
 
 export default Auth = (state = initialState, action) => {
@@ -34,6 +44,10 @@ export default Auth = (state = initialState, action) => {
       return Object.assign({}, state, {isLoading:false, facebookError: action.payload});
     case FACEBOOK_GRAPH_REQ_SUCCESS:
       return Object.assign({}, state, {isLoading:false, facebookGraphData: action.payload});
+    case GET_USER_DETAILS_ERROR:
+      return Object.assign({}, state, {isLoading:false});
+    case GET_USER_DETAILS_SUCCESS:
+      return Object.assign({}, state, {isLoading:false, userDetails: action.payload});
     default:
       return state
   }
