@@ -14,6 +14,8 @@ import theme from './Themes/Theme'
 import { Provider as StoreProvider } from 'react-redux';
 import store from './StoreManager/Store';
 
+import { ReduxNetworkProvider } from 'react-native-offline';
+
 import AppContainer from './Navigation/AppNavigator';
 import NavigationService from './Navigation/NavigationService'
 
@@ -23,13 +25,15 @@ useScreens();
 export default class App extends Component {
   render = () => (
     <StoreProvider store={store}>
-      <PaperProvider theme={theme}>
-        <AppContainer 
-          ref={navigatorRef => {
-            NavigationService.setTopLevelNavigator(navigatorRef);
-          }}
-        />
-      </PaperProvider>
+      <ReduxNetworkProvider>
+        <PaperProvider theme={theme}>
+          <AppContainer 
+            ref={navigatorRef => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}
+          />
+        </PaperProvider>
+      </ReduxNetworkProvider>      
     </StoreProvider>
   )
 }

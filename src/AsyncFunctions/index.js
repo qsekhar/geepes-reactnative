@@ -1,5 +1,5 @@
 import RNLocation from 'react-native-location';
-import {NetInfo} from '@react-native-community/netinfo';
+import NetInfo from '@react-native-community/netinfo';
 
 export const logout = async () => {
   try {

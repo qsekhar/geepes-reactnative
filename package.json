@@ -19,6 +19,7 @@
     "react-native-image-slider": "^2.0.3",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-location": "^2.2.0",
+    "react-native-offline": "^4.3.1",
     "react-native-paper": "^2.15.0",
     "react-native-reanimated": "^1.0.0",
     "react-native-screens": "^1.0.0-alpha.22",

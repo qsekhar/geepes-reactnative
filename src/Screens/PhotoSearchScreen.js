@@ -29,7 +29,6 @@ export default class PhotoSearchScreen extends Component {
     };
 
     getLocation();
-    getNetInfo();
   }
 
   render() {
