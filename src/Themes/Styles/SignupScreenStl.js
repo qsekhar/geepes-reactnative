@@ -46,6 +46,11 @@ export default styles = StyleSheet.create({
     backgroundColor: 'transparent',
     width: '100%'
   },
+  helperText: {
+    position: 'absolute',
+    left: 0,
+    bottom: -20
+  },
   headingContainer: {
     justifyContent: 'center',
     alignItems: 'center',

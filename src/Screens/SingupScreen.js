@@ -29,48 +29,95 @@ class SingupScreen extends Component {
             <View style={SignupScreenStl.textInputContainer}>
               <Icon style={SignupScreenStl.TextIcon} name="user" size={20}/>
               <TextInput
-                label='User Name'
+                label='First Name'
+                error={false}
                 icon='face'
                 mode='flat'
-                error={false}
                 value={this.state.text}
                 onChangeText={text => this.setState({ text })}
                 style={SignupScreenStl.textInput}
               />
+              <HelperText
+                style={SignupScreenStl.helperText}
+                type="error"
+                visible={!this.state.text.includes('@')}
+              >
+                First Name is invalid!
+              </HelperText>
             </View>
+
+            <View style={SignupScreenStl.textInputContainer}>
+              <Icon style={SignupScreenStl.TextIcon} name="user" size={20}/>
+              <TextInput
+                label='Last Name'
+                error={false}
+                icon='face'
+                mode='flat'
+                value={this.state.text}
+                onChangeText={text => this.setState({ text })}
+                style={SignupScreenStl.textInput}
+              />
+              <HelperText
+                style={SignupScreenStl.helperText}
+                type="error"
+                visible={!this.state.text.includes('@')}
+              >
+                First Name is invalid!
+              </HelperText>
+            </View>
+            
             <View style={SignupScreenStl.textInputContainer}>
               <Icon style={SignupScreenStl.TextIcon} name="envelope-o" size={20}/>
               <TextInput
                 label='Email Address'
                 mode='flat'
-                error={false}
                 value={this.state.text}
                 onChangeText={text => this.setState({ text })}
                 style={SignupScreenStl.textInput}
               />
+              <HelperText
+                style={SignupScreenStl.helperText}
+                type="error"
+                visible={!this.state.text.includes('@')}
+              >
+                Email address is invalid!
+              </HelperText>
             </View>
             <View style={SignupScreenStl.textInputContainer}>
               <Icon style={SignupScreenStl.TextIcon} name="key" size={20}/>
               <TextInput
                 label='Password'
                 mode='flat'
-                error={false}
                 value={this.state.text}
                 onChangeText={text => this.setState({ text })}
                 style={SignupScreenStl.textInput}
               />
+              <HelperText
+                style={SignupScreenStl.helperText}
+                type="error"
+                visible={!this.state.text.includes('@')}
+              >
+                Password is invalid!
+              </HelperText>
             </View>
             <View style={SignupScreenStl.textInputContainer}>
               <Icon style={SignupScreenStl.TextIcon} name="key" size={20}/>
               <TextInput
                 label='Confirm Password'
                 mode='flat'
-                error={false}
                 value={this.state.text}
                 onChangeText={text => this.setState({ text })}
                 style={SignupScreenStl.textInput}
               />
+              <HelperText
+                style={SignupScreenStl.helperText}
+                type="error"
+                visible={!this.state.text.includes('@')}
+              >
+                Confirm Password is invalid!
+              </HelperText>
             </View>
+            
             <GreenButton
               style={SignupScreenStl.signupButton}
               >
