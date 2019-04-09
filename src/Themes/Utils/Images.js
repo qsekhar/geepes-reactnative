@@ -4,6 +4,7 @@ const Authorization = 'Basic QWlyU3RyaWtlOkRnUG9zdDEwMDBrZw=='
 
 export default {
   logo : require('../Images/logo.png'),
+  headerLogo : require('../Images/small-header-logo.png'),
   background: require('../Images/app-background.jpg'),
   android: {
     tutorialSliders : [
@@ -17,6 +18,13 @@ export default {
   userAvatar: {
     uri: baseUrl + 'user/avatar/',
     method: 'GET',
+    headers: {
+      Authorization: Authorization,
+      Pragma: 'no-cache'
+    },
+  },
+  postcardImages : {
+    method: 'POST',
     headers: {
       Authorization: Authorization,
       Pragma: 'no-cache'

@@ -4,6 +4,7 @@ import { ImageBackground, StyleSheet } from 'react-native';
 import themeImages from '../Themes/Utils/Images'
 import Theme from '../Themes/Theme'
 import { Snackbar, Surface, Text } from 'react-native-paper';
+import AppbarHeader from '../Containers/Utils/AppbarHeader'
 
 import {connect} from 'react-redux';
 
@@ -25,6 +26,7 @@ class ViewWithBackground extends Component {
             resizeMode: 'cover' 
           }}
       >
+        <AppbarHeader />
         {offlineNotice}
         <Snackbar
           visible={this.props.showAlert}

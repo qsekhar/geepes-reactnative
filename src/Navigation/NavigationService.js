@@ -1,4 +1,4 @@
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, DrawerActions } from 'react-navigation';
 
 let _navigator;
 
@@ -12,6 +12,12 @@ function navigate(routeName, params) {
       routeName,
       params,
     })
+  );
+}
+
+export const openDrawer = () =>  {
+  _navigator.dispatch(
+    DrawerActions.openDrawer()
   );
 }
 

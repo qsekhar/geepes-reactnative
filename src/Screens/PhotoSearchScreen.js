@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-import {getLocation, getNetInfo} from '../AsyncFunctions'
 
-const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: 'none' }]} />
-);
+
+import SearchWithLocation from '../Containers/SearchWithLocation'
+
 const SecondRoute = () => (
   <View style={[styles.scene, { backgroundColor: 'none' }]} />
 );
@@ -27,8 +26,6 @@ export default class PhotoSearchScreen extends Component {
         { key: 'tag', title: 'Tag' },
       ],
     };
-
-    getLocation();
   }
 
   render() {
@@ -37,7 +34,7 @@ export default class PhotoSearchScreen extends Component {
         <TabView
           navigationState={this.state}
           renderScene={SceneMap({
-            location: FirstRoute,
+            location: SearchWithLocation,
             category: SecondRoute,
             tag: ThirdRoute,
           })}

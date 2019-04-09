@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import { Drawer, Avatar, Headline, Subheading, Divider , Surface } from 'react-native-paper';
 
 import LinearGradient from "react-native-linear-gradient";
-import {BoxShadow} from 'react-native-shadow'
 
 import themeImages from '../Themes/Utils/Images';
 import Theme from '../Themes/Theme'

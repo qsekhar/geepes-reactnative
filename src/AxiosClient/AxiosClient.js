@@ -2,7 +2,11 @@ import axios from 'axios';
 
 import AsyncStorage from '@react-native-community/async-storage'
 
+import NavigationService from '../Navigation/NavigationService' 
+
 import {Global} from '../StoreManager/Actions'
+
+import {logout} from '../AsyncFunctions'
 
 const config = {
   baseURL: 'http://192.168.0.4/digitalpostcard/html/digitalpostcard-api/',
@@ -39,6 +43,10 @@ AxiosClient.interceptors.response.use((response) => {
       // that falls out of the range of 2xx
        console.log(error.response.data);
        console.log(error.response.status);
+
+      if(error.response.data.error == 'Please Login again !'){
+        logout().then(() => NavigationService.navigate('AuthLoading'));
+      }
       // console.log(error.response.headers);
       store.dispatch(Global.axiosResponceError(error.response.status, error.response.data));
   } else if (error.request) {

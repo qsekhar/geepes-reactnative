@@ -1,9 +1,10 @@
 import RNLocation from 'react-native-location';
-import NetInfo from '@react-native-community/netinfo';
+import AsyncStorage from '@react-native-community/async-storage'
 
 export const logout = async () => {
   try {
     await AsyncStorage.removeItem('auth_token');
+
     return true;
   }
   catch(exception) {
@@ -12,10 +13,6 @@ export const logout = async () => {
 }
 
 export const getLocation = async() => {
-  RNLocation.getCurrentPermission()
-  .then(currentPermission => {
-    console.log(currentPermission)
-  })
   RNLocation.configure({
     distanceFilter: 5.0
   })
@@ -34,47 +31,10 @@ export const getLocation = async() => {
   }).then(granted => {
       if (granted) {
         this.locationSubscription = RNLocation.subscribeToLocationUpdates(locations => {
-          console.log(locations)
-          /* Example location returned
-          {
-            speed: -1,
-            longitude: -0.1337,
-            latitude: 51.50998,
-            accuracy: 5,
-            heading: -1,
-            altitude: 0,
-            altitudeAccuracy: -1
-            floor: 0
-            timestamp: 1446007304457.029
-          }
-          */
+          locations;
         })
       } else {
         console.log('not granted')
       }
     })
-}
-
-export const getNetInfo = async() => {
-  NetInfo.getConnectionInfo().then((connectionInfo) => {
-    console.log(
-      'Initial, type: ' +
-        connectionInfo.type +
-        ', effectiveType: ' +
-        connectionInfo.effectiveType,
-    );
-  });
-  function handleFirstConnectivityChange(connectionInfo) {
-    console.log(
-      'First change, type: ' +
-        connectionInfo.type +
-        ', effectiveType: ' +
-        connectionInfo.effectiveType,
-    );
-    NetInfo.removeEventListener(
-      'connectionChange',
-      handleFirstConnectivityChange,
-    );
-  }
-  NetInfo.addEventListener('connectionChange', handleFirstConnectivityChange);
 }
