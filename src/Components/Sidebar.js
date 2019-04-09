@@ -9,6 +9,7 @@ import themeImages from '../Themes/Utils/Images';
 import Theme from '../Themes/Theme'
 
 import AsyncStorage from '@react-native-community/async-storage';
+import {logout} from '../AsyncFunctions'
 import {connect} from 'react-redux';
 
 class Sidebar extends Component {
@@ -64,6 +65,13 @@ class Sidebar extends Component {
                 style={styles.drawerItems}
               />
             )}
+            <Drawer.Item
+                key='last'
+                icon='power-settings-new'
+                label='Logout'
+                onPress={() => { logout().then(() => this.navigateToScreen('AuthLoading')) }}
+                style={styles.drawerItems}
+              />
           </Drawer.Section>
         </View>
         

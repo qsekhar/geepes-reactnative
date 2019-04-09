@@ -14,6 +14,10 @@ import Sidebar from '../Components/Sidebar'
 import AuthLoadingScreen from '../Screens/AuthLoadingScreen'
 import HomeScreen from '../Screens/HomeScreen'
 import LandingScreen from '../Screens/LandingScreen'
+import LoginAndSignupScreen from '../Screens/LoginAndSignupScreen'
+import LoginScreen from '../Screens/LoginScreen'
+import SingupScreen from '../Screens/SingupScreen'
+import ForgotPasswordScreen from '../Screens/ForgotPasswordScreen'
 import GeepesMailboxScreen from '../Screens/GeepesMailboxScreen'
 
 import PhotoSearchScreen from '../Screens/PhotoSearchScreen'
@@ -77,10 +81,25 @@ const AppStack = createDrawerNavigator(
     contentComponent: Sidebar
   }
 );
+
 const AuthStack = createStackNavigator(
-  { Landing: LandingScreen }, 
+  { 
+    Landing: LandingScreen,
+    LoginAndSignup: LoginAndSignupScreen,
+    Login: LoginScreen,
+    Signup: SingupScreen,
+    ForgotPassword: ForgotPasswordScreen
+  }, 
   {
-    headerMode: 'none',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#FFF',
+      },
+      headerTintColor: Theme.colors.primary,
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
 );
 

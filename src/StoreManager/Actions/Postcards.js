@@ -37,42 +37,45 @@ const getPostCardsByLocation = () => (dispatch, getState) =>  {
     if (granted) {
       dispatch({type: GEOLOCATION_REQ_GRANTED})
       dispatch({type: GEOLOCATION_GET_LOCATION_INIT})
-      this.locationSubscription = RNLocation.subscribeToLocationUpdates(locations => {
-        
-        let latitude = locations[0].latitude;
-        let longitude = locations[0].longitude;
 
-        if(latitude == 0 && longitude == 0){
-          dispatch({type: GEOLOCATION_SERVICE_NOT_ACTIVE})
-        } else {
-          dispatch({type: GEOLOCATION_GET_LOCATION_SUCCESS, payload: locations[0]})
+      try {
+        RNLocation.getLatestLocation({ timeout: 60000 })
+        .then(locations => {
+          
+          let latitude = locations.latitude;
+          let longitude = locations.longitude;
 
-          var formData = new FormData();
+          if(latitude == 0 && longitude == 0){
+            dispatch({type: GEOLOCATION_SERVICE_NOT_ACTIVE})
+          } else {
+            dispatch({type: GEOLOCATION_GET_LOCATION_SUCCESS, payload: locations[0]})
 
-          formData.append('lat', latitude);
-          formData.append('lon', longitude);
+            var formData = new FormData();
 
-          //console.log(latitude)
+            formData.append('lat', latitude);
+            formData.append('lon', longitude);
 
-          const state = getState()
-          formData.append('page', state.PostCards.locationData.next);
-         
-          AxiosClient.post('api/image/get/location/', formData)
-            .then(function (response) {
+            const state = getState()
+            formData.append('page', state.PostCards.locationData.next);
+          
+            AxiosClient.post('api/image/get/location/', formData)
+              .then(function (response) {
+                if(typeof response.data.imagelist.error !== 'undefined'){
+                  dispatch({type: GET_POSTCARD_BY_LOCATION_NOT_FOUND, payload: response.data.imagelist.error});
+                } else {
+                  dispatch({type: GET_POSTCARD_BY_LOCATION_SUCCESS, payload: response.data.imagelist.data});
+                }
+              })
+              .catch((error) => {
+                dispatch({type: GET_POSTCARD_BY_LOCATION_ERROR, payload: "Can't get Postcards"});
+              })
 
-              if(typeof response.data.imagelist.error !== 'undefined'){
-                dispatch({type: GET_POSTCARD_BY_LOCATION_NOT_FOUND, payload: response.data.imagelist.error});
-              } else {
-                dispatch({type: GET_POSTCARD_BY_LOCATION_SUCCESS, payload: response.data.imagelist.data});
-              }
-            })
-            .catch((error) => {
-              dispatch({type: GET_POSTCARD_BY_LOCATION_ERROR, payload: "Can't get Postcards"});
-            })
-
-        }
-        this.locationSubscription();
-      })
+          }
+        })
+      } catch (exception) {
+        dispatch({type: GET_POSTCARD_BY_LOCATION_ERROR, payload: "Can't get Postcards"});
+      }
+      
     } else {
       dispatch({type: GEOLOCATION_REQ_DENIED})
     }

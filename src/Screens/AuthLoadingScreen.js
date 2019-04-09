@@ -29,9 +29,11 @@ class AuthLoadingScreen extends Component {
     AsyncStorage.getItem('auth_token')
     .then(auth_token => {
       if(auth_token){
+        this.props.dispatch({type: 'SHOW_DRAWER_HEADER'});
         this.props.dispatch(Auth.getUserDetails());
         this.props.navigation.navigate('App');
       } else {
+        this.props.dispatch({type: 'HIDE_DRAWER_HEADER'});
         this.props.navigation.navigate('Auth');
       }
     });

@@ -7,6 +7,7 @@ import {
 const initialState = {
   isLoading : false,
   showAlert : false,
+  showDrawerHeader: false,
   axiosErrorType : '',
   axiosErrorData : {data:{
     status:true,
@@ -17,6 +18,10 @@ const initialState = {
 
 export default Global = (state = initialState, action) => {
   switch (action.type) {
+    case 'SHOW_DRAWER_HEADER':
+      return Object.assign({}, state, { showDrawerHeader:true });
+    case 'HIDE_DRAWER_HEADER':
+      return Object.assign({}, state, { showDrawerHeader:false });
     case GLOBAL_AXIOS_SUCCESS:
       return Object.assign({}, state, { isLoading:false });
     case GLOBAL_AXIOS_ERROR:

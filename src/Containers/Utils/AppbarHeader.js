@@ -20,7 +20,7 @@ class AppbarHeader extends Component {
   render() {
     return (
       <View>
-        { (this.state.showHeader) ? 
+        { (this.props.showDrawerHeader) ? 
         <Appbar.Header style={styles.hearderContainer}>
           <Appbar.Action
             icon="list"
@@ -70,4 +70,8 @@ const styles = StyleSheet.create({
   mailBadge : { position: 'absolute', top: 5, left: 1 , backgroundColor: Theme.colors.accent }
 })
 
-export default connect()(AppbarHeader);
+const mapStateToProps = (state) => ({
+  showDrawerHeader: state.Global.showDrawerHeader
+})
+
+export default connect(mapStateToProps)(AppbarHeader);

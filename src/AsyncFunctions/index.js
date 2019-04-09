@@ -1,10 +1,12 @@
 import RNLocation from 'react-native-location';
 import AsyncStorage from '@react-native-community/async-storage'
 
+import { LoginManager } from "react-native-fbsdk";
+
 export const logout = async () => {
   try {
     await AsyncStorage.removeItem('auth_token');
-
+    LoginManager.logOut();
     return true;
   }
   catch(exception) {

@@ -9,7 +9,9 @@ export default theme = {
     ...DefaultTheme.colors,
     primary: '#296f00',
     accent: '#004073',
-    orange: '#f1612f'
+    orange: '#f1612f',
+    text: '#000000',
+    //placeholder: '#000000'
   },
 
   dimensions : {
@@ -28,6 +30,9 @@ export default theme = {
   baseStructure : {
     container: {
       flex: 1
+    },
+    textInput : {
+      backgroundColor: 'transparent'
     }
   }
 };
