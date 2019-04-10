@@ -26,5 +26,8 @@ export default styles = StyleSheet.create({
   },
   textInput: {
     backgroundColor: 'transparent'
+  },
+  radioText: {
+    paddingTop: 8
   }
 });

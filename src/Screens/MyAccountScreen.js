@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import {Text, TextInput, HelperText, Avatar} from 'react-native-paper';
+import {Text, TextInput, HelperText, Avatar, RadioButton} from 'react-native-paper';
+import { Dropdown } from 'react-native-material-dropdown';
+
 import themeImages from '../Themes/Utils/Images';
 import MyAccountScreenStl from '../Themes/Styles/MyAccoutScreenStl'
 
@@ -23,7 +25,10 @@ class MyAccountScreen extends Component {
       first_name: '',
       last_name: '',
       email: '',
-      userAvatar :  <Avatar.Image size={150} source={themeImages.userAvatar} />
+      userAvatar :  <Avatar.Image size={150} source={themeImages.userAvatar} />,
+      phone: '',
+      zipcode: '',
+      checked: 'first',
     };
 
     AsyncStorage.getItem('auth_token').then(token => {
@@ -42,6 +47,14 @@ class MyAccountScreen extends Component {
   }
 
   render() {
+    let data = [{
+      value: 'Banana',
+    }, {
+      value: 'Mango',
+    }, {
+      value: 'Pear',
+    }];
+    const { checked } = this.state;
     return (
       <ViewWithBackground withTraparentHeader={true}>
         <ScrollView style={MyAccountScreenStl.container}>
@@ -94,16 +107,99 @@ class MyAccountScreen extends Component {
           </View>
           
           <View style={MyAccountScreenStl.emailSection}>
-            <TextInput
-              style={MyAccountScreenStl.textInput}
-              label='Email'
-              error={false}
-              mode='flat'
-              value={this.state.email}
-              onChangeText={text => this.setState({ email: text })}
-              //onFocus={() => this.props.dispatch({type:'REMOVE_LOGIN_ERROR'})}
+
+            <View>
+              <TextInput
+                style={MyAccountScreenStl.textInput}
+                label='Email'
+                error={false}
+                mode='flat'
+                value={this.state.email}
+                onChangeText={text => this.setState({ email: text })}
+                //onFocus={() => this.props.dispatch({type:'REMOVE_LOGIN_ERROR'})}
+              />
+              <HelperText
+                type="error"
+                visible={true}
+              >
+                bla bla bla
+              </HelperText>
+            </View>
+
+            <View>
+              <Dropdown
+                style={MyAccountScreenStl.textInput}
+                label='Country'
+                data={data}
+              />
+              <HelperText
+                type="error"
+                visible={true}
+              >
+                bla bla bla
+              </HelperText>
+            </View>
+          </View>
+
+          <View style={MyAccountScreenStl.middleSection}>
+            <View style={MyAccountScreenStl.floatSection}>
+              <View style={MyAccountScreenStl.inputfieldContainer}>
+                <TextInput
+                  style={MyAccountScreenStl.textInput}
+                  label='Phone'
+                  error={false}
+                  mode='flat'
+                  value={this.state.phone}
+                  onChangeText={text => this.setState({ phone: text })}
+                  //onFocus={() => this.props.dispatch({type:'REMOVE_LOGIN_ERROR'})}
+                />
+                <HelperText
+                  type="error"
+                  visible={true}
+                >
+                  bla bla bla
+                </HelperText>
+              </View>
+            </View>
+            <View style={MyAccountScreenStl.floatSection}>
+              <View style={MyAccountScreenStl.inputfieldContainer}>
+                <TextInput
+                  style={MyAccountScreenStl.textInput}
+                  label='Zip Code'
+                  error={false}
+                  mode='flat'
+                  value={this.state.zipcode}
+                  onChangeText={text => this.setState({ zipcode: text })}
+                  //onFocus={() => this.props.dispatch({type:'REMOVE_LOGIN_ERROR'})}
+                />
+                <HelperText
+                  type="error"
+                  visible={true}
+                >
+                  bla bla bla
+                </HelperText>
+              </View>
+            </View>
+          </View>
+
+          <View style={MyAccountScreenStl.middleSection}>
+            <Text style={MyAccountScreenStl.radioText}>Gender</Text>
+            <Text>        </Text>
+            <RadioButton
+              value="first"
+              status={checked === 'first' ? 'checked' : 'unchecked'}
+              onPress={() => { this.setState({ checked: 'first' }); }}
             />
+            <Text style={MyAccountScreenStl.radioText}>Male</Text>
+            <RadioButton
+              value="second"
+              status={checked === 'second' ? 'checked' : 'unchecked'}
+              onPress={() => { this.setState({ checked: 'second' }); }}
+            />
+            <Text style={MyAccountScreenStl.radioText}>Female</Text>
+
             <HelperText
+              style={MyAccountScreenStl.radioText}
               type="error"
               visible={true}
             >
@@ -111,14 +207,7 @@ class MyAccountScreen extends Component {
             </HelperText>
           </View>
 
-          <View style={MyAccountScreenStl.middleSection}>
-            <View style={MyAccountScreenStl.floatSection}>
-              <Text>Country</Text>
-            </View>
-            <View style={MyAccountScreenStl.floatSection}>
-              <Text>asdsadsad</Text>
-            </View>
-          </View>
+
         </ScrollView>
       </ViewWithBackground>
     );
