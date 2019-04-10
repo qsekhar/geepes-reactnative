@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Drawer, Avatar, Headline, Subheading, Divider , Surface } from 'react-native-paper';
 
@@ -44,14 +44,15 @@ class Sidebar extends Component {
         ]}
         style={styles.container}
       >
-        <View style={styles.userDetailsSection}>
+        <TouchableOpacity 
+        onPress={() => this.navigateToScreen('MyAccount')}
+        style={styles.userDetailsSection}>
             <Surface style={styles.surface}>
             {this.state.userAvatar}
             </Surface>
-          
           <Headline style={styles.headline}>{name}</Headline>
           <Subheading style={styles.subheading}>{email}</Subheading>
-        </View>
+        </TouchableOpacity>
         <Divider />
         <View style={styles.navSection}>
           <Drawer.Section>

@@ -19,9 +19,13 @@ import LoginScreen from '../Screens/LoginScreen'
 import SingupScreen from '../Screens/SingupScreen'
 import ForgotPasswordScreen from '../Screens/ForgotPasswordScreen'
 import GeepesMailboxScreen from '../Screens/GeepesMailboxScreen'
-
+import MyAccountScreen from '../Screens/MyAccountScreen'
+import SettingsScreen from '../Screens/SettingsScreen'
 import PhotoSearchScreen from '../Screens/PhotoSearchScreen'
 import VideoSearchScreen from '../Screens/VideoSearchScreen'
+
+import {View} from 'react-native-paper'
+import themeImage from '../Themes/Utils/Images'
 
 
 
@@ -60,6 +64,19 @@ const HomeBottomStack = createBottomTabNavigator(
   }
 );
 
+const SettingsStack = createStackNavigator({
+  Settings : SettingsScreen,
+  MyAccount : MyAccountScreen
+},{
+  headerLayoutPreset: 'center',
+  defaultNavigationOptions: {
+    headerTransparent: true,
+    headerTitleStyle: {
+      fontWeight: 'normal',
+    }
+  }
+})
+
 const AppStack = createDrawerNavigator(
   { 
     Home: {
@@ -74,6 +91,13 @@ const AppStack = createDrawerNavigator(
       params: {
         name: 'Geepes Mailbox',
         icon: 'email'
+      }
+    },
+    Settings: {
+      screen: SettingsStack,
+      params: {
+        name: 'Settings',
+        icon: 'settings'
       }
     }
   },
@@ -91,10 +115,10 @@ const AuthStack = createStackNavigator(
     ForgotPassword: ForgotPasswordScreen
   }, 
   {
+    
     defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#FFF',
-      },
+      
+      headerTransparent: true,
       headerTintColor: Theme.colors.primary,
       headerTitleStyle: {
         fontWeight: 'bold',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 
 import themeImages from '../Themes/Utils/Images'
 import Theme from '../Themes/Theme'
@@ -15,33 +15,37 @@ class ViewWithBackground extends Component {
     const offlineNotice = !this.props.isConnected ? <Surface style={styles.surface}>
                             <Text style={styles.offLineText}>You are offline, Please try to reconnect</Text>
                           </Surface> : <Text style={styles.nullText}>''</Text>;
+                  
     return (
       <ImageBackground
           source={themeImages.background}
           style={{
             width: '100%',
-            height: '100%'
+            height: '100%',
+            //paddingTop: this.props.withTraparentHeader ? 55 : 0
           }}
           imageStyle={{
             resizeMode: 'cover' 
           }}
       >
         <AppbarHeader />
-        {offlineNotice}
-        <Snackbar
-          visible={this.props.showAlert}
-          onDismiss={() => this.props.dispatch({type:'HIDE_GLOBAL_ALERT'})}
-          action={{
-            label: 'Ok',
-            onPress: () => {
-              this.props.dispatch({type:'HIDE_GLOBAL_ALERT'})
-            },
-          }}
-        >
-          {this.props.AlertText}
-        </Snackbar>
+        <View style={{paddingTop: this.props.withTraparentHeader ? 55 : 0, flex:1}}>
+          {offlineNotice}
+          <Snackbar
+            visible={this.props.showAlert}
+            onDismiss={() => this.props.dispatch({type:'HIDE_GLOBAL_ALERT'})}
+            action={{
+              label: 'Ok',
+              onPress: () => {
+                this.props.dispatch({type:'HIDE_GLOBAL_ALERT'})
+              },
+            }}
+          >
+            {this.props.AlertText}
+          </Snackbar>
 
-        {this.props.children}
+          {this.props.children}
+        </View>
       </ImageBackground>
     );
   }
