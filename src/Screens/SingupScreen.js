@@ -8,7 +8,10 @@ import themeImages from '../Themes/Utils/Images';
 
 import { TextInput, Text, HelperText } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {GreenButton} from '../Components/Utils'
+import {GreenButton} from '../Components/Utils';
+
+import { connect } from 'react-redux';
+import {Auth} from '../StoreManager/Actions'
 
 class SingupScreen extends Component {
   constructor(props) {
@@ -22,6 +25,7 @@ class SingupScreen extends Component {
   }
 
   render() {
+    const {userRegistrationError} = this.props
     return (
       <ViewWithBackground style={SignupScreenStl.container}>
         <ScrollView>
@@ -33,19 +37,20 @@ class SingupScreen extends Component {
               <Icon style={SignupScreenStl.TextIcon} name="user" size={20}/>
               <TextInput
                 label='First Name'
-                error={false}
+                error={userRegistrationError.first_name && userRegistrationError.first_name != ''}
                 icon='face'
                 mode='flat'
                 value={this.state.first_name}
                 onChangeText={text => this.setState({ first_name: text })}
+                onFocus={() => this.props.dispatch({type:'REMOVE_REGISTRATION_ERROR'})}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={false}
+                visible={userRegistrationError.first_name != ''}
               >
-                Last Name is invalid!
+                {userRegistrationError.first_name}
               </HelperText>
             </View>
 
@@ -53,19 +58,20 @@ class SingupScreen extends Component {
               <Icon style={SignupScreenStl.TextIcon} name="user" size={20}/>
               <TextInput
                 label='Last Name'
-                error={false}
+                error={userRegistrationError.last_name && userRegistrationError.last_name != ''}
                 icon='face'
                 mode='flat'
                 value={this.state.last_name}
                 onChangeText={text => this.setState({ last_name: text })}
+                onFocus={() => this.props.dispatch({type:'REMOVE_REGISTRATION_ERROR'})}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={false}
+                visible={userRegistrationError.last_name != ''}
               >
-                Last Name is invalid!
+                {userRegistrationError.last_name}
               </HelperText>
             </View>
             
@@ -73,41 +79,50 @@ class SingupScreen extends Component {
               <Icon style={SignupScreenStl.TextIcon} name="envelope-o" size={20}/>
               <TextInput
                 label='Email Address'
+                error={userRegistrationError.email && userRegistrationError.email != ''}
                 mode='flat'
                 value={this.state.email}
                 onChangeText={text => this.setState({ email: text })}
+                onFocus={() => this.props.dispatch({type:'REMOVE_REGISTRATION_ERROR'})}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={false}
+                visible={userRegistrationError.email != ''}
               >
-                Email address is invalid!
+                {userRegistrationError.email}
               </HelperText>
             </View>
             <View style={SignupScreenStl.textInputContainer}>
-              <Icon style={SignupScreenStl.TextIcon} name="key" size={20}/>
+              <Icon 
+                style={SignupScreenStl.TextIcon} 
+                name={'key'} 
+                size={20}
+              />
               <TextInput
                 label='Password'
+                error={userRegistrationError.password && userRegistrationError.password != ''}
                 mode='flat'
                 secureTextEntry={true}
                 value={this.state.password}
                 onChangeText={text => this.setState({ password: text })}
+                onFocus={() => this.props.dispatch({type:'REMOVE_REGISTRATION_ERROR'})}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={false}
+                visible={userRegistrationError.password != ''}
               >
-                Password is invalid!
+                {userRegistrationError.password}
               </HelperText>
             </View>
             
             
             <GreenButton
               style={SignupScreenStl.signupButton}
+              onPress={() => this.props.dispatch(Auth.registerWithEmail(this.state))}
               >
                 Sign up
             </GreenButton>
@@ -127,5 +142,7 @@ class SingupScreen extends Component {
     );
   }
 }
-
-export default SingupScreen;
+const mapStateToProps = state => ({
+  userRegistrationError : state.Auth.userRegistrationError
+})
+export default connect(mapStateToProps)(SingupScreen);

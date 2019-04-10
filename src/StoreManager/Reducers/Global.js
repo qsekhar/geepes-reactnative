@@ -1,7 +1,8 @@
 import {
   GLOBAL_AXIOS_INIT,
   GLOBAL_AXIOS_ERROR,
-  GLOBAL_AXIOS_SUCCESS
+  GLOBAL_AXIOS_SUCCESS,
+  CHANGE_USER_PASS_SUCCESS
 } from '../Utils/Constants'
 
 const initialState = {
@@ -26,6 +27,8 @@ export default Global = (state = initialState, action) => {
       return Object.assign({}, state, { isLoading:false });
     case GLOBAL_AXIOS_ERROR:
       return Object.assign({}, state, { isLoading:false, axiosErrorData:action.payload, showAlert:true });
+    case CHANGE_USER_PASS_SUCCESS: 
+    return Object.assign({}, state, { isLoading:false, axiosErrorData:{data:{error:'Password Changed Successfully, Login with new password'}}, showAlert:true });
     case GLOBAL_AXIOS_INIT:
       return Object.assign({}, state, { isLoading:true, axiosErrorData: {data:{
         status:true,

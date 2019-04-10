@@ -68,8 +68,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProp = (state) => ({
   showAlert : state.Global.showAlert,
-  AlertText : JSON.stringify( state.Global.axiosErrorData.data.error ),
+  AlertText : JSON.stringify(state.Global.axiosErrorData.data.error),
   isConnected : state.network.isConnected
 })
 
 export default connect(mapStateToProp)(ViewWithBackground);
+
+//state.Global.axiosErrorData.data.error.map(item, index => `${index} : ${item}`)

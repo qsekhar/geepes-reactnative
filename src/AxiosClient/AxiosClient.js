@@ -48,7 +48,8 @@ AxiosClient.interceptors.response.use((response) => {
         logout().then(() => NavigationService.navigate('AuthLoading'));
       }
       // console.log(error.response.headers);
-      store.dispatch(Global.axiosResponceError(error.response.status, error.response.data));
+      //store.dispatch(Global.axiosResponceError(error.response.status, error.response.data));
+      return Promise.reject(error);
   } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the 

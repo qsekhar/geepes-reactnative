@@ -12,7 +12,23 @@ import {
   GET_USER_TOKEN_SUCCESS,
 
   GET_USER_DETAILS_SUCCESS,
-  GET_USER_DETAILS_ERROR
+  GET_USER_DETAILS_ERROR,
+
+  USER_REGISTRATION_INIT,
+  USER_REGISTRATION_SUCCESS,
+  USER_REGISTRATION_ERROR,
+
+  USER_LOGIN_INIT,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_ERROR,
+
+  REQ_USER_PASS_INIT,
+  REQ_USER_PASS_SUCCESS,
+  REQ_USER_PASS_ERROR,
+
+  CHANGE_USER_PASS_INIT,
+  CHANGE_USER_PASS_SUCCESS,
+  CHANGE_USER_PASS_ERROR,
 
 } from '../Utils/Constants'
 
@@ -83,9 +99,6 @@ const loginWithFacebook = () => (dispatch, getState) =>  {
   );
 }
 
-const loginWithEmail = () => (dispatch, getState) =>  {
-  console.log('loginWithEmail');
-}
 
 const getUserDetails = () => (dispatch, getState) => {
   AxiosClient.get('api/user/profile/details')
@@ -96,8 +109,111 @@ const getUserDetails = () => (dispatch, getState) => {
   })
 }
 
+const registerWithEmail = (params) => (dispatch, getState) => {
+
+  var formData = new FormData();
+  formData.append('email', params.email);
+  formData.append('first_name', params.first_name);
+  formData.append('last_name', params.last_name);
+  formData.append('password', params.password);
+
+  dispatch({type: USER_REGISTRATION_INIT, payload:formData});
+  AxiosClient.post('user/set/', formData)
+    .then(function (response) {
+
+      if(response.data){
+        dispatch({type: USER_REGISTRATION_SUCCESS, payload: response.data.user});
+
+        AsyncStorage.setItem('auth_token', response.data.user.auth_token)
+        .then(() => {
+          NavigationService.navigate('AuthLoading');
+        })
+      } else {
+        dispatch({type: USER_REGISTRATION_ERROR, payload: response.error});
+      }
+    })
+    .catch((error) => {
+      dispatch({type: USER_REGISTRATION_ERROR, payload: error.response.data.error});
+    })
+}
+
+
+const loginWithEmail = (params) => (dispatch, getState) => {
+
+  var formData = new FormData();
+  formData.append('email', params.email);
+  formData.append('password', params.password);
+
+  dispatch({type: USER_LOGIN_INIT, payload:formData});
+  AxiosClient.post('user/auth/', formData)
+    .then(function (response) {
+
+      if(response.data){
+        dispatch({type: USER_LOGIN_SUCCESS, payload: response.data.user});
+
+        AsyncStorage.setItem('auth_token', response.data.user.auth_token)
+        .then(() => {
+          NavigationService.navigate('AuthLoading');
+        })
+      } else {
+        dispatch({type: USER_LOGIN_ERROR, payload: response.error});
+      }
+    })
+    .catch((error) => {
+      dispatch({type: USER_LOGIN_ERROR, payload: error.response.data.error});
+    })
+}
+
+const requestPasswordResetCode = (params) => (dispatch, getState) => {
+
+  var formData = new FormData();
+  formData.append('email', params.email);
+
+  dispatch({type: REQ_USER_PASS_INIT, payload:formData});
+  AxiosClient.post('user/password/request/', formData)
+    .then(function (response) {
+
+      if(response.data){
+        dispatch({type: REQ_USER_PASS_SUCCESS, payload: response.data});
+      } else {
+        dispatch({type: REQ_USER_PASS_ERROR, payload: response.error.data.error});
+      }
+    })
+    .catch((error) => {
+      dispatch({type: REQ_USER_PASS_ERROR, payload:  error.response.data.error});
+    })
+}
+
+
+const changePasswordWithCode = (params) => (dispatch, getState) => {
+
+  var formData = new FormData();
+  formData.append('email', params.email);
+  formData.append('code', params.code);
+  formData.append('password', params.password);
+  formData.append('password_again', params.password_again);
+
+
+  dispatch({type: CHANGE_USER_PASS_INIT, payload:formData});
+  AxiosClient.post('user/password/change/', formData)
+    .then(function (response) {
+      if(response.data){
+        dispatch({type: CHANGE_USER_PASS_SUCCESS, payload: response.data});
+        NavigationService.navigate('Login');
+      } else {
+        dispatch({type: CHANGE_USER_PASS_ERROR, payload: response.error.data.error});
+      }
+    })
+    .catch((error) => {
+      dispatch({type: CHANGE_USER_PASS_ERROR, payload:  error.response.data.error});
+    })
+}
+
 export default {
   loginWithFacebook,
   loginWithEmail,
-  getUserDetails
+  getUserDetails,
+  registerWithEmail,
+  requestPasswordResetCode,
+  changePasswordWithCode
 }
