@@ -14,7 +14,10 @@ class SingupScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: ''
     };
   }
 
@@ -33,16 +36,16 @@ class SingupScreen extends Component {
                 error={false}
                 icon='face'
                 mode='flat'
-                value={this.state.text}
-                onChangeText={text => this.setState({ text })}
+                value={this.state.first_name}
+                onChangeText={text => this.setState({ first_name: text })}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={!this.state.text.includes('@')}
+                visible={false}
               >
-                First Name is invalid!
+                Last Name is invalid!
               </HelperText>
             </View>
 
@@ -53,16 +56,16 @@ class SingupScreen extends Component {
                 error={false}
                 icon='face'
                 mode='flat'
-                value={this.state.text}
-                onChangeText={text => this.setState({ text })}
+                value={this.state.last_name}
+                onChangeText={text => this.setState({ last_name: text })}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={!this.state.text.includes('@')}
+                visible={false}
               >
-                First Name is invalid!
+                Last Name is invalid!
               </HelperText>
             </View>
             
@@ -71,14 +74,14 @@ class SingupScreen extends Component {
               <TextInput
                 label='Email Address'
                 mode='flat'
-                value={this.state.text}
-                onChangeText={text => this.setState({ text })}
+                value={this.state.email}
+                onChangeText={text => this.setState({ email: text })}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={!this.state.text.includes('@')}
+                visible={false}
               >
                 Email address is invalid!
               </HelperText>
@@ -88,35 +91,20 @@ class SingupScreen extends Component {
               <TextInput
                 label='Password'
                 mode='flat'
-                value={this.state.text}
-                onChangeText={text => this.setState({ text })}
+                secureTextEntry={true}
+                value={this.state.password}
+                onChangeText={text => this.setState({ password: text })}
                 style={SignupScreenStl.textInput}
               />
               <HelperText
                 style={SignupScreenStl.helperText}
                 type="error"
-                visible={!this.state.text.includes('@')}
+                visible={false}
               >
                 Password is invalid!
               </HelperText>
             </View>
-            <View style={SignupScreenStl.textInputContainer}>
-              <Icon style={SignupScreenStl.TextIcon} name="key" size={20}/>
-              <TextInput
-                label='Confirm Password'
-                mode='flat'
-                value={this.state.text}
-                onChangeText={text => this.setState({ text })}
-                style={SignupScreenStl.textInput}
-              />
-              <HelperText
-                style={SignupScreenStl.helperText}
-                type="error"
-                visible={!this.state.text.includes('@')}
-              >
-                Confirm Password is invalid!
-              </HelperText>
-            </View>
+            
             
             <GreenButton
               style={SignupScreenStl.signupButton}
