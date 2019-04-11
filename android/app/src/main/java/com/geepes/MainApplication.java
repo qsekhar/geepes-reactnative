@@ -3,6 +3,9 @@ package com.geepes;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.github.reactnativecommunity.location.RNLocationPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
@@ -43,6 +46,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFSPackage(),
+            new ImageResizerPackage(),
+            new ImagePickerPackage(),
             new NetInfoPackage(),
             new RNLocationPackage(),
             new ReanimatedPackage(),

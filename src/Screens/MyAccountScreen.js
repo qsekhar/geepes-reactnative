@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, TouchableOpacity } from 'react-native';
 
 import {Text, TextInput, HelperText, Avatar, RadioButton} from 'react-native-paper';
 import { Dropdown } from 'react-native-material-dropdown';
+import DatePicker from 'react-native-datepicker'
+import {BlueButton, GreenButton} from '../Components/Utils';
+import PhotoUpload from 'react-native-photo-upload'
 
 import themeImages from '../Themes/Utils/Images';
 import MyAccountScreenStl from '../Themes/Styles/MyAccoutScreenStl'
@@ -29,6 +32,7 @@ class MyAccountScreen extends Component {
       phone: '',
       zipcode: '',
       checked: 'first',
+      date:"2016-05-15"
     };
 
     AsyncStorage.getItem('auth_token').then(token => {
@@ -102,7 +106,9 @@ class MyAccountScreen extends Component {
 
             </View>
             <View style={MyAccountScreenStl.avaterSection}>
-              {this.state.userAvatar}
+              <PhotoUpload>
+                {this.state.userAvatar}
+              </PhotoUpload>
             </View>
           </View>
           
@@ -126,18 +132,13 @@ class MyAccountScreen extends Component {
               </HelperText>
             </View>
 
-            <View>
+            <View style={MyAccountScreenStl.dropdownContainer}>
               <Dropdown
-                style={MyAccountScreenStl.textInput}
+                style={MyAccountScreenStl.dropdown}
                 label='Country'
+                error='bla bla bla'
                 data={data}
               />
-              <HelperText
-                type="error"
-                visible={true}
-              >
-                bla bla bla
-              </HelperText>
             </View>
           </View>
 
@@ -207,7 +208,61 @@ class MyAccountScreen extends Component {
             </HelperText>
           </View>
 
+          <View style={MyAccountScreenStl.birthday}>
+            <View style={MyAccountScreenStl.radioText}>
+              <Text>Birthday</Text>
+            </View>
+            <View style={{}}>
+              <DatePicker
+                style={{width: 200}}
+                date={this.state.date}
+                mode="date"
+                placeholder="select date"
+                format="YYYY-MM-DD"
+                minDate="2016-05-01"
+                maxDate="2016-06-01"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                  dateIcon: {
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0
+                  },
+                  dateInput: {
+                    marginLeft: 36
+                  }
+                  // ... You can check the source to find the other keys.
+                }}
+                onDateChange={(date) => {this.setState({date: date})}}
+              />
+              <HelperText
+                style={MyAccountScreenStl.radioText}
+                type="error"
+                visible={true}
+              >
+                bla bla bla
+              </HelperText>
+            </View>
+            
 
+          </View>
+
+          <View style={MyAccountScreenStl.middleSection}>
+              <View style={MyAccountScreenStl.floatSection}>
+                <Text style={{}}>39 Credit remaining, # of Geepes sent: 5</Text>
+              </View>  
+              <View style={MyAccountScreenStl.floatSection}>
+                <BlueButton>Add Credits</BlueButton>
+              </View>
+          </View>
+
+          <View style={MyAccountScreenStl.saveButtonCotainer}>
+            <GreenButton>Save</GreenButton>
+          </View>
+
+          
         </ScrollView>
       </ViewWithBackground>
     );

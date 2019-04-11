@@ -5,6 +5,7 @@ import themeImages from '../Themes/Utils/Images'
 import Theme from '../Themes/Theme'
 import { Snackbar, Surface, Text } from 'react-native-paper';
 import AppbarHeader from '../Containers/Utils/AppbarHeader'
+import MailBoxHeader from '../Containers/Utils/MailBoxHeader'
 
 import {connect} from 'react-redux';
 
@@ -15,6 +16,8 @@ class ViewWithBackground extends Component {
     const offlineNotice = !this.props.isConnected ? <Surface style={styles.surface}>
                             <Text style={styles.offLineText}>You are offline, Please try to reconnect</Text>
                           </Surface> : <Text style={styles.nullText}>''</Text>;
+    
+    const header = this.props.withMailBoxHeader ? <MailBoxHeader /> : <AppbarHeader />;
                   
     return (
       <ImageBackground
@@ -28,7 +31,7 @@ class ViewWithBackground extends Component {
             resizeMode: 'cover' 
           }}
       >
-        <AppbarHeader />
+        {header}
         <View style={{paddingTop: this.props.withTraparentHeader ? 55 : 0, flex:1}}>
           {offlineNotice}
           <Snackbar
