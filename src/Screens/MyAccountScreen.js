@@ -105,9 +105,7 @@ class MyAccountScreen extends Component {
 
             </View>
             <View style={MyAccountScreenStl.avaterSection}>
-
-                {this.state.userAvatar}
-
+              {this.state.userAvatar}
             </View>
           </View>
           
