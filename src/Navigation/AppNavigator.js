@@ -19,12 +19,13 @@ import LoginScreen from '../Screens/LoginScreen'
 import SingupScreen from '../Screens/SingupScreen'
 import ForgotPasswordScreen from '../Screens/ForgotPasswordScreen'
 import GeepesMailboxScreen from '../Screens/GeepesMailboxScreen'
+import MailDetailsScreen from '../Screens/MailDetailsScreen'
 import MyAccountScreen from '../Screens/MyAccountScreen'
 import SettingsScreen from '../Screens/SettingsScreen'
 import PhotoSearchScreen from '../Screens/PhotoSearchScreen'
 import VideoSearchScreen from '../Screens/VideoSearchScreen'
 
-import {View} from 'react-native-paper'
+import {View, TouchableRipple, Button} from 'react-native-paper'
 import themeImage from '../Themes/Utils/Images'
 
 
@@ -75,7 +76,19 @@ const SettingsStack = createStackNavigator({
       fontWeight: 'normal',
     }
   }
-})
+});
+
+const MailboxStack = createStackNavigator({
+  GeepesMailbox : GeepesMailboxScreen,
+  MailDetails : MailDetailsScreen
+},{
+  defaultNavigationOptions: {
+    headerTransparent: true,
+    headerTitleStyle: {
+      fontWeight: 'normal',
+    }
+  }
+});
 
 const AppStack = createDrawerNavigator(
   { 
@@ -87,7 +100,7 @@ const AppStack = createDrawerNavigator(
       }
     },
     GeepesMailbox: {
-      screen: GeepesMailboxScreen,
+      screen: MailboxStack,
       params: {
         name: 'Geepes Mailbox',
         icon: 'email'

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import { Appbar, Badge, TouchableRipple } from 'react-native-paper';
+import { Appbar, Badge, TouchableRipple, Text } from 'react-native-paper';
 
 import NavigationService, {openDrawer} from '../../Navigation/NavigationService'
 import Theme from '../../Themes/Theme'
@@ -32,18 +32,14 @@ class AppbarHeader extends Component {
 
 
           <TouchableRipple onPress={() => NavigationService.navigate('App')}>
-            <Image source={themeImages.headerLogo} style={styles.headerLogo}/>
+            <Text>Mail Box</Text>
           </TouchableRipple>
 
           <View style={styles.mailSection}>
-            <Badge
-              style={styles.mailBadge}
-              size={18}
-            >23</Badge>
             <Appbar.Action
-              icon="email"
+              icon="refresh"
               color={Theme.colors.primary}
-              onPress={() =>  NavigationService.navigate('GeepesMailbox')}
+              onPress={() =>  false}
               style={styles.openDrawerAction}
             >
             </Appbar.Action>

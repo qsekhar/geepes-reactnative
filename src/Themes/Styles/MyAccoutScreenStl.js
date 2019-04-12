@@ -29,5 +29,20 @@ export default styles = StyleSheet.create({
   },
   radioText: {
     paddingTop: 8
-  }
+  },
+  birthday: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  saveButtonCotainer: {
+    marginVertical: Theme.padding.md
+  },
+  dropdownContainer: {
+    marginTop: 0
+  },
+  dropdown: {
+    marginTop:0,
+    paddingTop:0
+  },
+  
 });
