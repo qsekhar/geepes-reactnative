@@ -13,6 +13,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import ViewWithBackground from '../Components/ViewWithBackground'
 
+import PhotoUpload from 'react-native-photo-upload'
+
 import { connect } from 'react-redux';
 
 class MyAccountScreen extends Component {
@@ -105,7 +107,9 @@ class MyAccountScreen extends Component {
 
             </View>
             <View style={MyAccountScreenStl.avaterSection}>
-              {this.state.userAvatar}
+              <PhotoUpload> 
+                {this.state.userAvatar}
+              </PhotoUpload>
             </View>
           </View>
           
