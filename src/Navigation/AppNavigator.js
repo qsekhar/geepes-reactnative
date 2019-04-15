@@ -25,6 +25,7 @@ import SettingsScreen from '../Screens/SettingsScreen'
 import PhotoSearchScreen from '../Screens/PhotoSearchScreen'
 import VideoSearchScreen from '../Screens/VideoSearchScreen'
 import CreditScreen from '../Screens/CreditScreen'
+import ReedemScreen from '../Screens/ReedemScreen'
 
 import {View, TouchableRipple, Button} from 'react-native-paper'
 import themeImage from '../Themes/Utils/Images'
@@ -91,6 +92,18 @@ const MailboxStack = createStackNavigator({
   }
 });
 
+const CreditStack = createStackNavigator({
+  Credit : CreditScreen,
+  Reedem : ReedemScreen
+},{
+  defaultNavigationOptions: {
+    headerTransparent: true,
+    headerTitleStyle: {
+      fontWeight: 'normal',
+    }
+  }
+});
+
 const AppStack = createDrawerNavigator(
   { 
     Home: {
@@ -108,7 +121,7 @@ const AppStack = createDrawerNavigator(
       }
     },
     Credit: {
-      screen: CreditScreen,
+      screen: CreditStack,
       params:{
         name: 'Credit',
         icon: 'attach-money'
