@@ -24,6 +24,7 @@ import MyAccountScreen from '../Screens/MyAccountScreen'
 import SettingsScreen from '../Screens/SettingsScreen'
 import PhotoSearchScreen from '../Screens/PhotoSearchScreen'
 import VideoSearchScreen from '../Screens/VideoSearchScreen'
+import CreditScreen from '../Screens/CreditScreen'
 
 import {View, TouchableRipple, Button} from 'react-native-paper'
 import themeImage from '../Themes/Utils/Images'
@@ -104,6 +105,13 @@ const AppStack = createDrawerNavigator(
       params: {
         name: 'Geepes Mailbox',
         icon: 'email'
+      }
+    },
+    Credit: {
+      screen: CreditScreen,
+      params:{
+        name: 'Credit',
+        icon: 'attach-money'
       }
     },
     Settings: {
