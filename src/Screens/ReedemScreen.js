@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
-import { Text, Subheading, List } from 'react-native-paper'
-import {GreenButton, BlueButton} from '../Components/Utils'
+import { Text, TextInput, HelperText } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {GreenButton} from '../Components/Utils'
 
 import ViewWithBackground from '../Components/ViewWithBackground';
 import CreditScreenStl from '../Themes/Styles/CreditScreenStl';
+import SignupScreenStl from '../Themes/Styles/SignupScreenStl'
 
 import Theme from '../Themes/Theme'
 import {connect} from 'react-redux';
-
-const BuyList = () => (
-  <List.Item
-    title="4 Credits"
-    description="$ 0.99"
-    descriptionStyle={CreditScreenStl.descriptionStyle}
-    left={props => <List.Icon {...props} color={Theme.colors.primary} icon="attach-money" />}
-    right={props => <GreenButton style={CreditScreenStl.buyBtn}>Buy</GreenButton>}
-  />
-);
 
 class ReedemScreen extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      reedem : ''
+    }
   }
 
   componentWillMount(){
@@ -37,7 +32,37 @@ class ReedemScreen extends Component {
     return (
       <ViewWithBackground withTraparentHeader={true}>
         <ScrollView>
-          <Text>asd</Text>
+          <View style={CreditScreenStl.creditRemaining}>
+            <Text style={CreditScreenStl.greenHeadline}>39</Text>
+            <Text>Credits Remaining</Text>
+          </View>
+
+          <View style={CreditScreenStl.container}>
+            <View style={SignupScreenStl.textInputContainer}>
+              <Icon style={SignupScreenStl.TextIcon} name="tags" size={20}/>
+              <TextInput
+                label='Reedem Code'
+                error={true}
+                mode='flat'
+                value={this.state.reedem}
+                onChangeText={text => this.setState({ reedem: text })}
+                //onFocus={() => this.props.dispatch({type:'REMOVE_LOGIN_ERROR'})}
+                style={SignupScreenStl.textInput}
+              />
+              <HelperText
+                style={SignupScreenStl.helperText}
+                type="error"
+                //visible={userLoginError.email != ''}
+              >
+                asd
+              </HelperText>
+            </View>
+
+            <View style={CreditScreenStl.redemBtn}> 
+              <GreenButton>Reedem</GreenButton>
+            </View>
+          </View>
+
         </ScrollView>
       </ViewWithBackground>
     );

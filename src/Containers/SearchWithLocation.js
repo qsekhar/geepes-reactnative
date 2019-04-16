@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions } from 'react-native';
+import { View, Text, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { connect } from 'react-redux';
 
 import SearchScreenStl from '../Themes/Styles/SearchScreenStl'
 import Theme from '../Themes/Theme'
 import {Surface, Subheading, Button} from 'react-native-paper'
+import NavigationService from '../Navigation/NavigationService' 
 
 import {Postcards} from '../StoreManager/Actions';
 
@@ -25,22 +26,32 @@ class SearchWithLocation extends Component {
         {this.props.locationData.image.map((item, index) => {
             return (
               <View key={index} style={SearchScreenStl.cardContainer}>
-                <Surface style={SearchScreenStl.imageSurface}>
-                  <AutoHeightImage 
-                    source={{uri: item.original}} 
-                    width={Dimensions.get('window').width - 2 * Theme.padding.sm}
-                    resizeMode={'cover'}
-                    style={SearchScreenStl.cardImage}
-                  />
-                </Surface>
-                <Subheading  style={SearchScreenStl.cardText}>{item.title}</Subheading>
+                <TouchableOpacity
+                  onPress={() => NavigationService.navigate('WriteMessage', {
+                    itemId: item.id,
+                    title: item.title,
+                  })}
+                >
+                  <Surface style={SearchScreenStl.imageSurface}>
+                    <AutoHeightImage 
+                      source={{uri: item.original}} 
+                      width={Dimensions.get('window').width - 2 * Theme.padding.sm}
+                      resizeMode={'cover'}
+                      style={SearchScreenStl.cardImage}
+                    />
+                  </Surface>
+                  <Subheading  style={SearchScreenStl.cardText}>{item.title}</Subheading>
+                </TouchableOpacity>
               </View>
             )
           }
         )}
-        <Button
+
+        {this.props.locationData.image.length > 0 ? <Button
           onPress={() => this.props.dispatch(Postcards.getPostCardsByLocation())}
-        >Load More</Button>
+        >Load More</Button> : <Text></Text> }
+        
+
       </ScrollView>
     );
   }

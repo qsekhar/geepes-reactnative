@@ -23,14 +23,16 @@ import MailDetailsScreen from '../Screens/MailDetailsScreen'
 import MyAccountScreen from '../Screens/MyAccountScreen'
 import SettingsScreen from '../Screens/SettingsScreen'
 import PhotoSearchScreen from '../Screens/PhotoSearchScreen'
+import WriteMessageScreen from '../Screens/WriteMessageScreen'
+import SelectContactScreen from '../Screens/SelectContactScreen'
 import VideoSearchScreen from '../Screens/VideoSearchScreen'
 import CreditScreen from '../Screens/CreditScreen'
 import ReedemScreen from '../Screens/ReedemScreen'
 
+/*
 import {View, TouchableRipple, Button} from 'react-native-paper'
 import themeImage from '../Themes/Utils/Images'
-
-
+*/
 
 
 const HomeBottomStack = createBottomTabNavigator(
@@ -104,10 +106,24 @@ const CreditStack = createStackNavigator({
   }
 });
 
+const photoStack = createStackNavigator({
+  Photo : HomeBottomStack,
+  WriteMessage: WriteMessageScreen,
+  SelectContact : SelectContactScreen
+},{
+  headerLayoutPreset: 'center',
+  defaultNavigationOptions: {
+    headerTransparent: true,
+    headerTitleStyle: {
+      fontWeight: 'normal',
+    }
+  }
+})
+
 const AppStack = createDrawerNavigator(
   { 
     Home: {
-      screen: HomeBottomStack,
+      screen: photoStack,
       params: {
         name: 'Home',
         icon: 'home'

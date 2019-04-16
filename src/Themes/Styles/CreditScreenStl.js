@@ -41,5 +41,10 @@ export default styles = StyleSheet.create({
   },
   rightPaddingContainer: {
     paddingRight: Theme.padding.sm
+  },
+  redemBtn : {
+    justifyContent: 'center',
+    height: 30,
+    marginTop: Theme.padding.lg,
   }
 })

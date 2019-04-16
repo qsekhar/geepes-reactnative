@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, WebView} from 'react-native';
+import { View, ScrollView, Dimensions} from 'react-native';
 
 import Theme from '../Themes/Theme'
 
