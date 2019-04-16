@@ -46,5 +46,10 @@ export default styles = StyleSheet.create({
   },
   previewContainer:{
     marginTop: Theme.padding.sm
+  },
+  back: {
+    backgroundColor: '#FFF',
+    height: 100,
+    padding: Theme.padding.md
   }
 });

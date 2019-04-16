@@ -3,6 +3,7 @@ import { View, ScrollView, Dimensions } from 'react-native';
 import ViewWithBackground from '../Components/ViewWithBackground';
 import { TextInput, Text, Surface} from 'react-native-paper';
 import AutoHeightImage from 'react-native-auto-height-image';
+import FlipCard from 'react-native-flip-card'
 import WriteMessageScreenStl from '../Themes/Styles/WriteMessageScreenStl';
 import NavigationService from '../Navigation/NavigationService';
 import Theme from '../Themes/Theme'
@@ -44,14 +45,29 @@ class SelectContactScreen extends Component {
           >Add Credit</BlueButton>
 
           <View style={WriteMessageScreenStl.previewContainer}>
-            <Surface style={WriteMessageScreenStl.detailsSurface}>
-              <AutoHeightImage 
-                source={{uri: 'https://picsum.photos/700'}} 
-                width={Dimensions.get('window').width - 2 * Theme.padding.sm}
-                resizeMode={'cover'}
-                style={WriteMessageScreenStl.detailsImage}
-              />
-            </Surface>
+            <FlipCard
+              flipHorizontal={true}
+              flipVertical={false}
+              perspective={1000}
+              friction={30}
+            >
+              {/* Face Side */}
+              <View style={styles.face}>
+                <Surface style={WriteMessageScreenStl.detailsSurface}>
+                <AutoHeightImage 
+                  source={{uri: 'https://picsum.photos/700'}} 
+                  width={Dimensions.get('window').width - 2 * Theme.padding.sm}
+                  resizeMode={'cover'}
+                  style={WriteMessageScreenStl.detailsImage}
+                />
+              </Surface>
+              </View>
+              {/* Back Side */}
+              <View style={styles.back}>
+                <Text>The Back and other text</Text>
+              </View>
+            </FlipCard>
+            
           </View>
 
           <Text>Tap Geepes to See massage</Text>
