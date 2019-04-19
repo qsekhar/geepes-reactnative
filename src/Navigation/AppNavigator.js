@@ -22,6 +22,10 @@ import GeepesMailboxScreen from '../Screens/GeepesMailboxScreen'
 import MailDetailsScreen from '../Screens/MailDetailsScreen'
 import MyAccountScreen from '../Screens/MyAccountScreen'
 import SettingsScreen from '../Screens/SettingsScreen'
+import TutorialScreen from '../Screens/TutorialScreen'
+import SupportFAQScreen from '../Screens/SupportFAQScreen'
+import AboutUsScreen from '../Screens/AboutUsScreen'
+import InviteFriendsScreen from '../Screens/InviteFriendsScreen'
 import PhotoSearchScreen from '../Screens/PhotoSearchScreen'
 import WriteMessageScreen from '../Screens/WriteMessageScreen'
 import SelectContactScreen from '../Screens/SelectContactScreen'
@@ -71,7 +75,10 @@ const HomeBottomStack = createBottomTabNavigator(
 
 const SettingsStack = createStackNavigator({
   Settings : SettingsScreen,
-  MyAccount : MyAccountScreen
+  MyAccount : MyAccountScreen,
+  Tutorial : TutorialScreen,
+  SupportFAQ : SupportFAQScreen,
+  AboutUs: AboutUsScreen
 },{
   headerLayoutPreset: 'center',
   defaultNavigationOptions: {
@@ -143,13 +150,27 @@ const AppStack = createDrawerNavigator(
         icon: 'attach-money'
       }
     },
+    InviteFriends: {
+      screen: InviteFriendsScreen,
+      params: {
+        name: 'Invite Friends',
+        icon: 'people'
+      }
+    },
     Settings: {
       screen: SettingsStack,
       params: {
         name: 'Settings',
         icon: 'settings'
       }
-    }
+    },
+    Tutorial: {
+      screen: TutorialScreen,
+      params: {
+        name: 'Tutorial',
+        icon: 'library-books'
+      }
+    },
   },
   {
     contentComponent: Sidebar

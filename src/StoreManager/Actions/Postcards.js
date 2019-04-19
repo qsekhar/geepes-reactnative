@@ -11,6 +11,11 @@ import {
   GET_POSTCARD_BY_LOCATION_SUCCESS,
   GET_POSTCARD_BY_LOCATION_NOT_FOUND,
   GET_POSTCARD_BY_LOCATION_ERROR,
+
+  GET_ALLCATEGORIES_INIT,
+  GET_ALLCATEGORIES_SUCCESS,
+  GET_ALLCATEGORIES_NOT_FOUND,
+  GET_ALLCATEGORIES_ERROR,
 } from '../Utils/Constants'
 
 import RNLocation from 'react-native-location';
@@ -82,6 +87,11 @@ const getPostCardsByLocation = () => (dispatch, getState) =>  {
   })
 }
 
+const getAllCategory = () => (dispatch, getState) => {
+  dispatch({type: GET_ALLCATEGORIES_INIT});
+}
+
 export default {
-  getPostCardsByLocation
+  getPostCardsByLocation,
+  getAllCategory
 }

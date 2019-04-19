@@ -2,49 +2,45 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-
-
 import SearchWithLocation from '../Containers/SearchWithLocation'
+import PhotoSearchByCategory from '../Containers/PhotoSearchByCategory'
 
-const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: 'none' }]} />
-);
+import {connect} from 'react-redux';
+
 const ThirdRoute = () => (
   <View style={[styles.scene, { backgroundColor: 'none' }]} />
 );
 
 
 import ViewWithBackground from '../Components/ViewWithBackground'
-export default class PhotoSearchScreen extends Component {
+class PhotoSearchScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      index: 0,
-      routes: [
-        { key: 'location', title: 'Location' },
-        { key: 'category', title: 'Category' },
-        { key: 'tag', title: 'Tag' },
-      ],
-    };
   }
 
   render() {
     return (
       <ViewWithBackground>
         <TabView
-          navigationState={this.state}
+          navigationState={this.props.HomeUpperTabs}
           renderScene={SceneMap({
             location: SearchWithLocation,
-            category: SecondRoute,
+            category: PhotoSearchByCategory,
             tag: ThirdRoute,
           })}
-          onIndexChange={index => this.setState({ index })}
+          onIndexChange={index => this.props.dispatch({ type : 'CHANGE_HOME_UPPER_TAB', payload : index })}
           initialLayout={{ width: Dimensions.get('window').width }}
         />
       </ViewWithBackground>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  HomeUpperTabs : state.HomeUpperTabs
+})
+
+export default connect(mapStateToProps)(PhotoSearchScreen);
 
 const styles = StyleSheet.create({
   scene: {

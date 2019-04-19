@@ -63,7 +63,7 @@ class SelectContactScreen extends Component {
               </Surface>
               </View>
               {/* Back Side */}
-              <View style={styles.back}>
+              <View style={WriteMessageScreenStl.back}>
                 <Text>The Back and other text</Text>
               </View>
             </FlipCard>
