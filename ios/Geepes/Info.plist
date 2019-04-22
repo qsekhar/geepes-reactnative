@@ -70,6 +70,25 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Arial.ttf</string>
+		<string>Arturo-Bold Trial.ttf</string>
+		<string>Arturo-ExtraBold Trial.ttf</string>
+		<string>Arturo-ExtraLight Trial.ttf</string>
+		<string>Arturo-Light Trial.ttf</string>
+		<string>Arturo-Regular Trial.ttf</string>
+		<string>Georgia.ttf</string>
+		<string>Gothic.ttf</string>
+		<string>Roboto-Black.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Light.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Thin.ttf</string>
+		<string>RobotoCondensed-Bold.ttf</string>
+		<string>RobotoCondensed-Light.ttf</string>
+		<string>RobotoCondensed-Regular.ttf</string>
+		<string>Snell.ttf</string>
+		<string>Zapfino.ttf</string>
 	</array>
 </dict>
 </plist>
