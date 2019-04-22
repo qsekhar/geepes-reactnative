@@ -11,7 +11,7 @@ import Theme from '../Themes/Theme'
 
 import NavigationService from '../Navigation/NavigationService'
 import {connect} from 'react-redux';
-import { TextInput } from 'react-native-gesture-handler';
+import {WriteGeepes} from '../StoreManager/Actions'
 
 const SwitchBtn = (props) => {
   let {active} = props
@@ -43,15 +43,16 @@ class WriteMessageScreen extends Component {
     super(props);
     const {id, title, originalImage} = props.navigation.state.params;
     this.state = {
+      dialogVisible: false,
+    };
+
+    this.props.dispatch(WriteGeepes.changeCard({
       id : id,
       title: title,
-      originalImage: originalImage,
-      message: '',
-      fontColor : 'black',
-      fontStyle: '',
-      dialogVisible: false,
-      massageCountInfo : 'Enter Your Message (0 / 120)'
-    };
+      originalImage: originalImage
+    }));
+
+
   }
 
   static navigationOptions = ({navigation}) => ({
@@ -72,6 +73,7 @@ class WriteMessageScreen extends Component {
  
   handleCancel = () => {
     this.setState({ dialogVisible: false });
+    WriteGeepes.changeMessage('')
   };
  
   handleOK = () => {
@@ -88,7 +90,7 @@ class WriteMessageScreen extends Component {
           <View style={{}}>
             <Surface style={WriteMessageScreenStl.detailsSurface}>
               <AutoHeightImage 
-                source={{uri: this.state.originalImage}} 
+                source={{uri: this.props.originalImage}} 
                 width={Dimensions.get('window').width - 2 * Theme.padding.sm}
                 resizeMode={'cover'}
                 style={WriteMessageScreenStl.detailsImage}
@@ -100,7 +102,7 @@ class WriteMessageScreen extends Component {
 
             <TouchableRipple onPress={this.showDialog} style={WriteMessageScreenStl.textContainer}>
               <Surface>
-                <Text style={[WriteMessageScreenStl.theText, {color: this.state.fontColor}]}>{this.state.message}</Text>
+                <Text style={[WriteMessageScreenStl.theText, {color: this.props.fontColor, fontFamily: this.props.fontFamily}]}>{this.props.message}</Text>
               </Surface>
             </TouchableRipple>
 
@@ -108,25 +110,29 @@ class WriteMessageScreen extends Component {
               <Text>Select a font</Text>
               <View style={WriteMessageScreenStl.toggleContainer}>
                   <SwitchBtn 
-                    onPress = {() => this.setState({fontStyle: ''})}
+                    onPress = {() =>  this.props.dispatch(WriteGeepes.changeFontFamily('Arial'))}
                     name='Arial'
-                    active={false}
+                    active={this.props.fontFamily == 'Arial'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontFamily('Zapfino'))}
                     name='Zapfino'
-                    active={false}
+                    active={this.props.fontFamily == 'Zapfino'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontFamily('Gorgia'))}
                     name='Gorgia'
-                    active={false}
+                    active={this.props.fontFamily == 'Gorgia'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontFamily('Snell'))}
                     name='Snell'
-                    active={true}
+                    active={this.props.fontFamily == 'Snell'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontFamily('Gothic'))}
                     name='Gothic'
-                    active={false}
+                    active={this.props.fontFamily == 'Gothic'}
                   />
               </View>
             </View>
@@ -135,29 +141,29 @@ class WriteMessageScreen extends Component {
               <Text>Select a color</Text>
               <View style={WriteMessageScreenStl.toggleContainer}>
                   <SwitchBtn 
-                    onPress = {() => this.setState({fontColor: 'red'})}
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontColor('red'))}
                     name='Red'
-                    active={this.state.fontColor == 'red'}
+                    active={this.props.fontColor == 'red'}
                   />
                   <SwitchBtn 
-                    onPress = {() => this.setState({fontColor: 'green'})}
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontColor('green'))}
                     name='Green'
-                    active={this.state.fontColor == 'green'}
+                    active={this.props.fontColor == 'green'}
                   />
                   <SwitchBtn 
-                    onPress = {() => this.setState({fontColor: 'black'})}
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontColor('black'))}
                     name='Black'
-                    active={this.state.fontColor == 'black'}
+                    active={this.props.fontColor == 'black'}
                   />
                   <SwitchBtn 
-                    onPress = {() => this.setState({fontColor: 'blue'})}
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontColor('blue'))}
                     name='Blue'
-                    active={this.state.fontColor == 'blue'}
+                    active={this.props.fontColor == 'blue'}
                   />
                   <SwitchBtn 
-                    onPress = {() => this.setState({fontColor: 'purple'})}
+                    onPress = {() => this.props.dispatch(WriteGeepes.changeFontColor('purple'))}
                     name='Purple'
-                    active={this.state.fontColor == 'purple'}
+                    active={this.props.fontColor == 'purple'}
                   />
               </View>
             </View>
@@ -174,12 +180,12 @@ class WriteMessageScreen extends Component {
         </ScrollView>
 
         <Dialog.Container visible={this.state.dialogVisible}>
-          <Dialog.Title>{this.state.massageCountInfo}</Dialog.Title>
+          <Dialog.Title>{this.props.messageCountInfo}</Dialog.Title>
           <Dialog.Input 
             multiline={true}
-            onChangeText={(message) => this.setState({message : message})}
+            onChangeText={(message) => this.props.dispatch(WriteGeepes.changeMessage(message))}
             maxLength = {120}
-            value={this.state.message}
+            value={this.props.message}
             height={40}
             style={{height:100}}
           />
@@ -192,4 +198,14 @@ class WriteMessageScreen extends Component {
   }
 }
 
-export default connect()(WriteMessageScreen);
+const mapStateToProps = state => ({
+  id : state.WriteGeepes.id,
+  title: state.WriteGeepes.title,
+  originalImage: state.WriteGeepes.originalImage,
+  message: state.WriteGeepes.message,
+  fontColor : state.WriteGeepes.fontColor,
+  fontFamily: state.WriteGeepes.fontFamily,
+  messageCountInfo : state.WriteGeepes.messageCountInfo
+})
+
+export default connect(mapStateToProps)(WriteMessageScreen);

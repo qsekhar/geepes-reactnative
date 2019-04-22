@@ -9,11 +9,14 @@ import NavigationService from '../Navigation/NavigationService';
 import Theme from '../Themes/Theme'
 
 import {connect} from 'react-redux';
+import {WriteGeepes} from '../StoreManager/Actions'
 
 class SelectContactScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      email : '',
+      name : ''
     };
   }
 
@@ -31,18 +34,13 @@ class SelectContactScreen extends Component {
         <ScrollView style={WriteMessageScreenStl.container}>
           <TextInput 
             placeholder="Enter a email id"
+            onChangeText={(text) => this.setState({email:text})}
           />
 
-          <View style={WriteMessageScreenStl.creditInfo}>
-            <Text>1 Credit out of 23 total, will be used</Text>
-          </View>
-
-          <BlueButton
-            onPress={() => NavigationService.navigate('Credit', {
-
-            })}
-            style={WriteMessageScreenStl.nextButton}
-          >Add Credit</BlueButton>
+          <TextInput 
+            placeholder="Enter a name"
+            onChangeText={(text) => this.setState({name:text})}
+          />
 
           <View style={WriteMessageScreenStl.previewContainer}>
             <FlipCard
@@ -55,7 +53,7 @@ class SelectContactScreen extends Component {
               <View style={styles.face}>
                 <Surface style={WriteMessageScreenStl.detailsSurface}>
                 <AutoHeightImage 
-                  source={{uri: 'https://picsum.photos/700'}} 
+                  source={{uri: this.props.originalImage}} 
                   width={Dimensions.get('window').width - 2 * Theme.padding.sm}
                   resizeMode={'cover'}
                   style={WriteMessageScreenStl.detailsImage}
@@ -64,7 +62,7 @@ class SelectContactScreen extends Component {
               </View>
               {/* Back Side */}
               <View style={WriteMessageScreenStl.back}>
-                <Text>The Back and other text</Text>
+                <Text style={[WriteMessageScreenStl.theText, {color: this.props.fontColor, fontFamily: this.props.fontFamily}]}>{this.props.message}</Text>
               </View>
             </FlipCard>
             
@@ -72,10 +70,26 @@ class SelectContactScreen extends Component {
 
           <Text>Tap Geepes to See massage</Text>
 
+          <BlueButton
+            onPress={() => this.props.dispatch(WriteGeepes.sendGepeesByEmail(this.state))}
+            style={WriteMessageScreenStl.nextButton}
+          >Send</BlueButton>
+
         </ScrollView>
       </ViewWithBackground>
     );
   }
 }
 
-export default connect()(SelectContactScreen);
+const mapStateToProps = state => ({
+  id : state.WriteGeepes.id,
+  title: state.WriteGeepes.title,
+  originalImage: state.WriteGeepes.originalImage,
+  message: state.WriteGeepes.message,
+  fontColor : state.WriteGeepes.fontColor,
+  fontFamily: state.WriteGeepes.fontFamily,
+  messageCountInfo : state.WriteGeepes.messageCountInfo
+})
+
+
+export default connect(mapStateToProps)(SelectContactScreen);

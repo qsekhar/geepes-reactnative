@@ -4,6 +4,7 @@ import Global from './Global'
 import Geolocation from './Geolocation'
 import PostCards from './PostCards'
 import HomeUpperTabs from './HomeUpperTabs'
+import WriteGeepes from './WriteGeepes'
 import { reducer as network } from 'react-native-offline';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   Geolocation,
   PostCards,
   HomeUpperTabs,
+  WriteGeepes,
   network
 })
