@@ -3,6 +3,7 @@ import { View, ScrollView, Dimensions } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import WriteMessageScreenStl from '../Themes/Styles/WriteMessageScreenStl'
 import {Surface, Text, TouchableRipple} from 'react-native-paper'
+import Dialog from "react-native-dialog";
 import {BlueButton} from '../Components/Utils'
 import ViewWithBackground from '../Components/ViewWithBackground';
 
@@ -10,6 +11,7 @@ import Theme from '../Themes/Theme'
 
 import NavigationService from '../Navigation/NavigationService'
 import {connect} from 'react-redux';
+import { TextInput } from 'react-native-gesture-handler';
 
 const SwitchBtn = (props) => {
   let {active} = props
@@ -44,8 +46,11 @@ class WriteMessageScreen extends Component {
       id : id,
       title: title,
       originalImage: originalImage,
+      message: '',
       fontColor : 'black',
       fontStyle: '',
+      dialogVisible: false,
+      massageCountInfo : 'Enter Your Message (0 / 120)'
     };
   }
 
@@ -61,6 +66,19 @@ class WriteMessageScreen extends Component {
     this.props.dispatch({type: 'SHOW_DRAWER_HEADER'});
   }
 
+  showDialog = () => {
+    this.setState({ dialogVisible: true });
+  };
+ 
+  handleCancel = () => {
+    this.setState({ dialogVisible: false });
+  };
+ 
+  handleOK = () => {
+    // The user has pressed the "Delete" button, so here you can do your own logic.
+    // ...Your logic
+    this.setState({ dialogVisible: false });
+  };
 
   render() {
     return (
@@ -80,9 +98,9 @@ class WriteMessageScreen extends Component {
 
           <View style={WriteMessageScreenStl.messageContainer}>
 
-            <TouchableRipple onPress={() => {}} style={WriteMessageScreenStl.textContainer}>
+            <TouchableRipple onPress={this.showDialog} style={WriteMessageScreenStl.textContainer}>
               <Surface>
-                <Text style={[WriteMessageScreenStl.theText, {color: this.state.fontColor}]}>asdsad</Text>
+                <Text style={[WriteMessageScreenStl.theText, {color: this.state.fontColor}]}>{this.state.message}</Text>
               </Surface>
             </TouchableRipple>
 
@@ -154,6 +172,21 @@ class WriteMessageScreen extends Component {
           >Next</BlueButton>
 
         </ScrollView>
+
+        <Dialog.Container visible={this.state.dialogVisible}>
+          <Dialog.Title>{this.state.massageCountInfo}</Dialog.Title>
+          <Dialog.Input 
+            multiline={true}
+            onChangeText={(message) => this.setState({message : message})}
+            maxLength = {120}
+            value={this.state.message}
+            height={40}
+            style={{height:100}}
+          />
+          <Dialog.Button label="Cancel" onPress={this.handleCancel} />
+          <Dialog.Button label="OK" onPress={this.handleOK} />
+        </Dialog.Container>
+
       </ViewWithBackground>
     );
   }
