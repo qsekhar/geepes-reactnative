@@ -7,9 +7,11 @@ import PhotoSearchByCategory from '../Containers/PhotoSearchByCategory'
 
 import {connect} from 'react-redux';
 
+/*
 const ThirdRoute = () => (
   <View style={[styles.scene, { backgroundColor: 'none' }]} />
 );
+*/
 
 
 import ViewWithBackground from '../Components/ViewWithBackground'
@@ -26,7 +28,7 @@ class PhotoSearchScreen extends Component {
           renderScene={SceneMap({
             location: SearchWithLocation,
             category: PhotoSearchByCategory,
-            tag: ThirdRoute,
+            //tag: ThirdRoute,
           })}
           onIndexChange={index => this.props.dispatch({ type : 'CHANGE_HOME_UPPER_TAB', payload : index })}
           initialLayout={{ width: Dimensions.get('window').width }}

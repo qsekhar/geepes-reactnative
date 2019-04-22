@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, Dimensions } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import WriteMessageScreenStl from '../Themes/Styles/WriteMessageScreenStl'
-import {Surface, TextInput, Text, TouchableRipple} from 'react-native-paper'
+import {Surface, Text, TouchableRipple} from 'react-native-paper'
 import {BlueButton} from '../Components/Utils'
 import ViewWithBackground from '../Components/ViewWithBackground';
 
@@ -39,10 +39,19 @@ const SwitchBtn = (props) => {
 class WriteMessageScreen extends Component {
   constructor(props) {
     super(props);
+    const {id, title, originalImage} = props.navigation.state.params;
     this.state = {
-      value: 'left',
+      id : id,
+      title: title,
+      originalImage: originalImage,
+      fontColor : 'black',
+      fontStyle: '',
     };
   }
+
+  static navigationOptions = ({navigation}) => ({
+    title: `${navigation.state.params.title}`,
+  })
 
   componentWillMount(){
     this.props.dispatch({type: 'HIDE_DRAWER_HEADER'});
@@ -61,7 +70,7 @@ class WriteMessageScreen extends Component {
           <View style={{}}>
             <Surface style={WriteMessageScreenStl.detailsSurface}>
               <AutoHeightImage 
-                source={{uri: 'https://picsum.photos/700'}} 
+                source={{uri: this.state.originalImage}} 
                 width={Dimensions.get('window').width - 2 * Theme.padding.sm}
                 resizeMode={'cover'}
                 style={WriteMessageScreenStl.detailsImage}
@@ -70,16 +79,18 @@ class WriteMessageScreen extends Component {
           </View>
 
           <View style={WriteMessageScreenStl.messageContainer}>
-            <TextInput 
-              style={WriteMessageScreenStl.textArea}
-              multiline={true}
-            />
+
+            <TouchableRipple onPress={() => {}} style={WriteMessageScreenStl.textContainer}>
+              <Surface>
+                <Text style={[WriteMessageScreenStl.theText, {color: this.state.fontColor}]}>asdsad</Text>
+              </Surface>
+            </TouchableRipple>
 
             <View>
               <Text>Select a font</Text>
               <View style={WriteMessageScreenStl.toggleContainer}>
                   <SwitchBtn 
-                    onPress = {() => console.log('asd')}
+                    onPress = {() => this.setState({fontStyle: ''})}
                     name='Arial'
                     active={false}
                   />
@@ -106,25 +117,29 @@ class WriteMessageScreen extends Component {
               <Text>Select a color</Text>
               <View style={WriteMessageScreenStl.toggleContainer}>
                   <SwitchBtn 
-                    onPress = {() => console.log('asd')}
+                    onPress = {() => this.setState({fontColor: 'red'})}
                     name='Red'
-                    active={false}
+                    active={this.state.fontColor == 'red'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.setState({fontColor: 'green'})}
                     name='Green'
-                    active={true}
+                    active={this.state.fontColor == 'green'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.setState({fontColor: 'black'})}
                     name='Black'
-                    active={false}
+                    active={this.state.fontColor == 'black'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.setState({fontColor: 'blue'})}
                     name='Blue'
-                    active={false}
+                    active={this.state.fontColor == 'blue'}
                   />
                   <SwitchBtn 
+                    onPress = {() => this.setState({fontColor: 'purple'})}
                     name='Purple'
-                    active={false}
+                    active={this.state.fontColor == 'purple'}
                   />
               </View>
             </View>

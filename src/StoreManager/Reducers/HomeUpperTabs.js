@@ -7,7 +7,7 @@ const initialState = {
   routes: [
     { key: 'location', title: 'Location' },
     { key: 'category', title: 'Category' },
-    { key: 'tag', title: 'Tag' },
+    //{ key: 'tag', title: 'Tag' },
   ],
 }
 

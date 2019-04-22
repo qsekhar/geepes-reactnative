@@ -16,6 +16,13 @@ import {
   GET_ALLCATEGORIES_SUCCESS,
   GET_ALLCATEGORIES_NOT_FOUND,
   GET_ALLCATEGORIES_ERROR,
+
+  CHANGE_CATEGORY_SEARCH_STRING,
+
+  GET_POSTCARD_BY_CATEGORY_INIT,
+  GET_POSTCARD_BY_CATEGORY_SUCCESS,
+  GET_POSTCARD_BY_CATEGORY_NOT_FOUND,
+  GET_POSTCARD_BY_CATEGORY_ERROR,
 } from '../Utils/Constants'
 
 import RNLocation from 'react-native-location';
@@ -89,9 +96,35 @@ const getPostCardsByLocation = () => (dispatch, getState) =>  {
 
 const getAllCategory = () => (dispatch, getState) => {
   dispatch({type: GET_ALLCATEGORIES_INIT});
+
+  AxiosClient.get('api/category/get/').then((response) => {
+    dispatch({type: GET_ALLCATEGORIES_SUCCESS, payload: response.data.categorylist.data});
+  }).catch((error) => {
+    dispatch({type: GET_ALLCATEGORIES_ERROR, payload: "Can't get Categories"});
+  })
 }
 
+const getPostCardsByCategory = () => (dispatch, getState) => {
+
+}
+
+const getPostCategoryBySearhString = (query) => (dispatch, getState) => {
+  dispatch({type: CHANGE_CATEGORY_SEARCH_STRING, payload: query});
+  dispatch({type: GET_POSTCARD_BY_CATEGORY_INIT});
+
+  AxiosClient.get('/api/image/get/category/'+ query).then((response) => {
+    if(typeof response.data.imagelist.error !== 'undefined'){
+      dispatch({type: GET_POSTCARD_BY_CATEGORY_NOT_FOUND, payload: response.data.imagelist.error});
+    } else {
+      dispatch({type: GET_POSTCARD_BY_CATEGORY_SUCCESS, payload: response.data.imagelist.data});
+    }
+  }).catch((error) => {
+    dispatch({type: GET_POSTCARD_BY_CATEGORY_ERROR, payload: "Can't get Categories"});
+  })
+}
 export default {
   getPostCardsByLocation,
-  getAllCategory
+  getAllCategory,
+  getPostCardsByCategory,
+  getPostCategoryBySearhString
 }

@@ -17,6 +17,12 @@ export default styles = StyleSheet.create({
   messageContainer: {
 
   },
+  textContainer: {
+    marginVertical: Theme.padding.sm,
+  },
+  theText: {
+    padding: Theme.padding.sm,
+  },
   textArea:{
     height: 100,
     marginTop: Theme.padding.sm,

@@ -19,5 +19,19 @@ export default styles = StyleSheet.create({
   cardText:{
     color: '#000',
     paddingTop: 10,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    paddingHorizontal:  Theme.padding.sm,
+    marginTop: Theme.padding.sm
+  },
+  nagetMargin: {
+    marginTop: -15
+  },
+  flipCardStyle:{
+    flex:8
+  },
+  flipIconStyle:{
+    flex:1
   }
 });

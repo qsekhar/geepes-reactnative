@@ -114,7 +114,7 @@ const CreditStack = createStackNavigator({
 });
 
 const photoStack = createStackNavigator({
-  Photo : HomeBottomStack,
+  Photo : PhotoSearchScreen, // HomeBottomStack,
   WriteMessage: WriteMessageScreen,
   SelectContact : SelectContactScreen
 },{
@@ -143,6 +143,7 @@ const AppStack = createDrawerNavigator(
         icon: 'email'
       }
     },
+    /*
     Credit: {
       screen: CreditStack,
       params:{
@@ -150,6 +151,7 @@ const AppStack = createDrawerNavigator(
         icon: 'attach-money'
       }
     },
+    */
     InviteFriends: {
       screen: InviteFriendsScreen,
       params: {
