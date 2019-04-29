@@ -11,10 +11,11 @@ export default styles = StyleSheet.create({
   },
   imageSurface:{
     elevation: 12,
-    borderRadius: 10
+    borderRadius: 10,
+    minHeight: 200
   },
   cardImage:{
-    borderRadius: 10
+    borderRadius: 10,
   },
   cardText:{
     color: '#000',

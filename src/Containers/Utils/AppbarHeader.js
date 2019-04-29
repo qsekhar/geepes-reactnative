@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import { Appbar, Badge, TouchableRipple } from 'react-native-paper';
 
 import NavigationService, {openDrawer} from '../../Navigation/NavigationService'
@@ -36,10 +36,11 @@ class AppbarHeader extends Component {
           </TouchableRipple>
 
           <View style={styles.mailSection}>
-            <Badge
+            {this.props.inboxcount > 0 ? <Badge
               style={styles.mailBadge}
               size={18}
-            >23</Badge>
+            >{this.props.inboxcount}</Badge> : <Text style={styles.mailBadge}></Text>}
+            
             <Appbar.Action
               icon="email"
               color={Theme.colors.primary}
@@ -71,7 +72,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-  showDrawerHeader: state.Global.showDrawerHeader
+  showDrawerHeader: state.Global.showDrawerHeader,
+  inboxcount: state.Mail.inboxcount
 })
 
 export default connect(mapStateToProps)(AppbarHeader);

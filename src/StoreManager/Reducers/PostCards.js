@@ -5,6 +5,7 @@ import {
   GET_POSTCARD_BY_LOCATION_ERROR,
   GEOLOCATION_SERVICE_NOT_ACTIVE,
   GET_ALLCATEGORIES_SUCCESS,
+  GET_POSTCARD_BY_CATEGORY_INIT,
   GET_POSTCARD_BY_CATEGORY_SUCCESS,
   GET_POSTCARD_BY_CATEGORY_NOT_FOUND,
 
@@ -12,6 +13,7 @@ import {
 } from '../Utils/Constants'
 
 const initialState = {
+  isLoading: false,
   locationErrorString : '',
   categorySearchQuery : '',
   locationData : {
@@ -48,9 +50,20 @@ export default Global = (state = initialState, action) => {
             image : [...state.locationData.image, ...image]
         } 
       }
+    case GET_POSTCARD_BY_CATEGORY_INIT : 
+      return { 
+        ...state,
+        isLoading: true,
+      }
+    case GET_POSTCARD_BY_CATEGORY_NOT_FOUND:
+      return { 
+        ...state,
+        isLoading: false,
+      }
     case GET_POSTCARD_BY_CATEGORY_SUCCESS:
       return { 
         ...state,
+        isLoading: false,
         categoryErrorString: '',
         categoryData : {
           ...state.categoryData,

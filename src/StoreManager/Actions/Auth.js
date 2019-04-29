@@ -30,6 +30,8 @@ import {
   CHANGE_USER_PASS_SUCCESS,
   CHANGE_USER_PASS_ERROR,
 
+  GET_NEW_MSG_INFO
+
 } from '../Utils/Constants'
 
 import AxiosClient from '../../AxiosClient/AxiosClient'
@@ -105,6 +107,11 @@ const getUserDetails = () => (dispatch, getState) => {
   .then((result) => {
     if(typeof result.data.user != 'undefined') {
       dispatch({type: GET_USER_DETAILS_SUCCESS, payload: result.data});
+        AxiosClient.get('api/user/postcard/inbox/new/count').then((result) => {
+          if(typeof result.data.inboxcount != 'undefined'){
+            dispatch({type: GET_NEW_MSG_INFO, payload: result.data.inboxcount});
+          }
+        })
     } else {
       dispatch({type: GET_USER_DETAILS_ERROR, payload: "Please login again"});
     }

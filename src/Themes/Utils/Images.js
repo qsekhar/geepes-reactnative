@@ -7,6 +7,7 @@ export default {
   logo : require('../Images/logo.png'),
   headerLogo : require('../Images/small-header-logo.png'),
   background: require('../Images/app-background.jpg'),
+  fallbackSource : require('../Images/web_hi_res_512.png'),
   android: {
     tutorialSliders : [
       require('../Images/slider1.png'),

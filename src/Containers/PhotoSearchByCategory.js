@@ -10,6 +10,8 @@ import {Surface, Subheading, Button, Searchbar, IconButton} from 'react-native-p
 import FlipCard from 'react-native-flip-card'
 import NavigationService from '../Navigation/NavigationService'
 
+import staticImages from '../Themes/Utils/Images'
+
 import { Dropdown } from 'react-native-material-dropdown';
 
 
@@ -44,6 +46,7 @@ class PhotoSearchByCategory extends Component {
           >
             <View>
               <Searchbar
+                icon={this.props.isLoading ? 'pan-tool' : 'search'}
                 placeholder="Search Category"
                 onChangeText={query => { this.setState({ categorySearchQuery: query }); }}
                 value={this.state.categorySearchQuery}
@@ -109,6 +112,7 @@ class PhotoSearchByCategory extends Component {
 }
 
 mapStateToProps = (state) => ({
+  isLoading : state.PostCards.isLoading,
   locationErrorString : state.PostCards.locationErrorString,
   categoryData: state.PostCards.categoryData,
   categories: state.PostCards.categories,
