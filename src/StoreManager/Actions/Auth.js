@@ -103,7 +103,11 @@ const loginWithFacebook = () => (dispatch, getState) =>  {
 const getUserDetails = () => (dispatch, getState) => {
   AxiosClient.get('api/user/profile/details')
   .then((result) => {
-    dispatch({type: GET_USER_DETAILS_SUCCESS, payload: result.data});
+    if(typeof result.data.user != 'undefined') {
+      dispatch({type: GET_USER_DETAILS_SUCCESS, payload: result.data});
+    } else {
+      dispatch({type: GET_USER_DETAILS_ERROR, payload: "Please login again"});
+    }
   }).catch((error) => {
     dispatch({type: GET_USER_DETAILS_ERROR, payload: "Can't get User Details"});
   })

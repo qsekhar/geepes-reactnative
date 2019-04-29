@@ -2,7 +2,9 @@ import {
   GLOBAL_AXIOS_INIT,
   GLOBAL_AXIOS_ERROR,
   GLOBAL_AXIOS_SUCCESS,
-  CHANGE_USER_PASS_SUCCESS
+  CHANGE_USER_PASS_SUCCESS,
+  GET_USER_DETAILS_ERROR,
+  GET_POSTCARD_BY_LOCATION_ERROR
 } from '../Utils/Constants'
 
 const initialState = {
@@ -39,6 +41,10 @@ export default Global = (state = initialState, action) => {
       status:true,
       error: []
     }} });
+    case GET_USER_DETAILS_ERROR:
+      return Object.assign({}, state, { isLoading:false, axiosErrorData: {data: {error : 'Api is not working properly'}}, showAlert:true });
+    case GET_POSTCARD_BY_LOCATION_ERROR:
+      return Object.assign({}, state, { isLoading:false, axiosErrorData: {data: {error : 'Geepes are not available here'}}, showAlert:true });
     default:
       return state
   }

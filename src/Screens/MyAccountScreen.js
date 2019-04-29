@@ -252,7 +252,7 @@ class MyAccountScreen extends Component {
 
           <View style={MyAccountScreenStl.middleSection}>
               <View style={MyAccountScreenStl.floatSection}>
-                <Text style={{}}>39 Credit remaining, # of Geepes sent: 5</Text>
+                
               </View>  
               <View style={MyAccountScreenStl.floatSection}>
                 <BlueButton>Add Credits</BlueButton>

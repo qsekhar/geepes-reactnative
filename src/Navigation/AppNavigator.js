@@ -151,7 +151,7 @@ const AppStack = createDrawerNavigator(
         icon: 'attach-money'
       }
     },
-    */
+    
     InviteFriends: {
       screen: InviteFriendsScreen,
       params: {
@@ -159,6 +159,7 @@ const AppStack = createDrawerNavigator(
         icon: 'people'
       }
     },
+    */
     Settings: {
       screen: SettingsStack,
       params: {
@@ -166,6 +167,7 @@ const AppStack = createDrawerNavigator(
         icon: 'settings'
       }
     },
+    
     Tutorial: {
       screen: TutorialScreen,
       params: {

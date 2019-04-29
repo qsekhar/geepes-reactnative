@@ -9,7 +9,8 @@ import {Global} from '../StoreManager/Actions'
 import {logout} from '../AsyncFunctions'
 
 const config = {
-  baseURL: 'http://192.168.0.4/digitalpostcard/html/digitalpostcard-api/',
+  //baseURL: 'http://192.168.0.4/digitalpostcard/html/geepes-api/',
+  baseURL: 'http://ec2-54-68-205-162.us-west-2.compute.amazonaws.com/geepes-api/',
   auth: {
     username: 'AirStrike',
     password: 'DgPost1000kg'

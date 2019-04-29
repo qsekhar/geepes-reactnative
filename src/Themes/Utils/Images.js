@@ -1,5 +1,6 @@
 
-const baseUrl = 'http://192.168.0.4/digitalpostcard/html/digitalpostcard-api/'
+//const baseUrl = 'http://192.168.0.4/digitalpostcard/html/geepes-api/'
+const baseUrl = 'http://ec2-54-68-205-162.us-west-2.compute.amazonaws.com/geepes-api/'
 const Authorization = 'Basic QWlyU3RyaWtlOkRnUG9zdDEwMDBrZw=='
 
 export default {
