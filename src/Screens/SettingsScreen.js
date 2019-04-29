@@ -4,6 +4,8 @@ import {List} from 'react-native-paper';
 
 import MyAccountScreenStl from '../Themes/Styles/MyAccoutScreenStl'
 import ViewWithBackground from '../Components/ViewWithBackground'
+import NavigationService from '../Navigation/NavigationService'
+
 import { connect } from 'react-redux';
 
 class SettingsScreen extends Component {
@@ -17,24 +19,24 @@ class SettingsScreen extends Component {
         <ScrollView>
           <List.Section>
             <List.Item
+              onPress={() => NavigationService.navigate('MyAccount')}
               title="My Account"
-              left={() => <List.Icon icon="folder" />}
+              left={() => <List.Icon icon="account-circle" />}
             />
             <List.Item
+              onPress={() => NavigationService.navigate('Tutorial')}
               title="Tutorial"
-              left={() => <List.Icon icon="folder" />}
+              left={() => <List.Icon icon="library-books" />}
             />
             <List.Item
+              onPress={() => NavigationService.navigate('SupportFAQ')}
               title="Support / FAQ"
-              left={() => <List.Icon icon="folder" />}
+              left={() => <List.Icon icon="help" />}
             />
             <List.Item
-              title="Redeem"
-              left={() => <List.Icon icon="folder" />}
-            />
-            <List.Item
+              onPress={() => NavigationService.navigate('AboutUs')}
               title="About Us"
-              left={() => <List.Icon icon="folder" />}
+              left={() => <List.Icon icon="announcement" />}
             />
           </List.Section>
         </ScrollView>
