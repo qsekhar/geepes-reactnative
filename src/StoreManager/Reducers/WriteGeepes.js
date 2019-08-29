@@ -9,7 +9,7 @@ import {
 const initialState = {
   id : 0,
   title: '',
-  originalImage: '',
+  originalImage: 'http://ec2-54-68-205-162.us-west-2.compute.amazonaws.com/geepes-api/images-logo/preloader.png',
   message: '',
   fontColor : 'black',
   fontFamily: 'Arial',
