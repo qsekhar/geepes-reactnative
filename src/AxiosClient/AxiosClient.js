@@ -10,10 +10,10 @@ import {logout} from '../AsyncFunctions'
 
 const config = {
   //baseURL: 'http://192.168.0.4/digitalpostcard/html/geepes-api/',
-  baseURL: 'http://ec2-54-68-205-162.us-west-2.compute.amazonaws.com/geepes-api/',
+  baseURL: 'remoteURL',
   auth: {
-    username: 'AirStrike',
-    password: 'DgPost1000kg'
+    username: 'AnyUserNAme',
+    password: 'ANyPASSCODE'
   }
 }
 
